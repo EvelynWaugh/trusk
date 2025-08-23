@@ -8,9 +8,10 @@
 		},
 		{
 			"path": "../../themes/trusk"
+		},
+		{
+			"path": "../../themes/wellnesstour"
 		}
 	],
-	"settings": {
-		"kiroAgent.configureMCP": "Disabled"
-	}
+
 }

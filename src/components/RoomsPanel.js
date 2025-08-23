@@ -24,8 +24,8 @@ const RoomsInnerRows = styled.div`
 `;
 export default function RoomsPanel({data, setData, seasonData, tarifData}) {
   const handlechangeRoom = (e, korpus_id, room_id, tariff, season) => {
-    const korpusDataChanged = data.map((korpus) => {
-      const roomsdataChanged = korpus.room.map((room) => {
+    const korpusDataChanged = data.map((section) => {
+      const roomsdataChanged = section.room.map((room) => {
         if (room.room_id === room_id) {
           console.log(room_id);
           const taryfModified = room.tariff.map((t) => {
@@ -52,9 +52,9 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
         }
         return room;
       });
-      return korpus.id === korpus_id
-        ? {...korpus, room: roomsdataChanged}
-        : korpus;
+      return section.id === korpus_id
+        ? {...section, room: roomsdataChanged}
+        : section;
     });
 
     console.log(korpusDataChanged);
@@ -62,8 +62,8 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
   };
 
   const handleChangeChild = (e, korpus_id, room_id, tariff, season, dt) => {
-    const korpusDataChanged = data.map((korpus) => {
-      const roomsdataChanged = korpus.room.map((room) => {
+    const korpusDataChanged = data.map((section) => {
+      const roomsdataChanged = section.room.map((room) => {
         if (room.room_id === room_id) {
           const taryfModified = room.tariff.map((t) => {
             if (t.tariff_name === tariff) {
@@ -87,9 +87,9 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
         }
         return room;
       });
-      return korpus.id === korpus_id
-        ? {...korpus, room: roomsdataChanged}
-        : korpus;
+      return section.id === korpus_id
+        ? {...section, room: roomsdataChanged}
+        : section;
     });
     console.log(korpusDataChanged);
     setData(korpusDataChanged);
@@ -97,12 +97,12 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
 
   return (
     <div>
-      {data.map((korpus, korpus_index) => (
+      {data.map((section, korpus_index) => (
         <div>
           <Typography align="center" component="h3" variant="h3">
-            {korpus.nazva_korpusu}
+            {section.nazva_korpusu}
           </Typography>
-          {korpus.room.map((sRoom, ri) => (
+          {section.room.map((sRoom, ri) => (
             <div key={`room-${ri}`}>
               <RoomRowTable
                 className="header_room"
@@ -150,7 +150,7 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
                                   onChange={(e) =>
                                     handlechangeRoom(
                                       e,
-                                      korpus.id,
+                                      section.id,
                                       sRoom.room_id,
                                       tarif.tariff_name,
                                       season.booking_period_name
@@ -183,7 +183,7 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
                                 onChange={(e) =>
                                   handleChangeChild(
                                     e,
-                                    korpus.id,
+                                    section.id,
                                     sRoom.room_id,
                                     tarif.tariff_name,
                                     season.booking_period_name,

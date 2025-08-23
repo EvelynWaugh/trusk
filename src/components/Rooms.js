@@ -135,7 +135,7 @@ const Rooms = (props) => {
   const {isNew, setKorpusNew, closeDialog, korpusData} = props;
 
   const [
-    korpus,
+    section,
     setKorpusData,
     data,
     setData,
@@ -144,13 +144,13 @@ const Rooms = (props) => {
     childData,
   ] = korpusData;
   console.log(data);
-  if (!korpus) {
+  if (!section) {
     return <div></div>;
   }
   const [expanded, setExpanded] = useState({});
   const [dialogGallery, setDialogGallery] = useState(false);
   const [editedGallery, setEditedGallery] = useState(null);
-  console.log(korpus);
+  console.log(section);
   const handleChangeExpanded = (panel) => (event, isExpanded) => {
     setExpanded({...expanded, [panel]: !expanded[panel]});
   };
@@ -167,7 +167,7 @@ const Rooms = (props) => {
   //   const ref = useRef(null);
   //   console.log(ref.current?.value);
   // useEffect(() => {
-  //   const newKorpusData = korpus.room.map((room) => {
+  //   const newKorpusData = section.room.map((room) => {
   //     if (
   //       room.room_info &&
   //       room.room_info !== "" &&
@@ -192,7 +192,7 @@ const Rooms = (props) => {
   //       };
   //     }
   //   });
-  //   return {...korpus, room: newKorpusData};
+  //   return {...section, room: newKorpusData};
   // });
   const getImageUrl = (id) => {
     return wp.media.attachment(id).get("url");
@@ -212,11 +212,11 @@ const Rooms = (props) => {
     lovest_price_room: false,
   };
   const addRoom = (id) => {
-    setKorpusData({...korpus, room: [...korpus.room, emptyRoom]});
+    setKorpusData({...section, room: [...section.room, emptyRoom]});
   };
   //roomName
   const setRoomName = (e, room_id) => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -224,10 +224,10 @@ const Rooms = (props) => {
           }
         : room
     );
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
   const setRoomID = (e, room_id) => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -236,7 +236,7 @@ const Rooms = (props) => {
         : room
     );
 
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
   let frame;
   const setMainImage = (e, id) => {
@@ -268,8 +268,8 @@ const Rooms = (props) => {
       const attachment = frame.state().get("selection").first().toJSON();
 
       setKorpusData({
-        ...korpus,
-        room: korpus.room.map((r) =>
+        ...section,
+        room: section.room.map((r) =>
           r.room_id === id
             ? {
                 ...r,
@@ -317,8 +317,8 @@ const Rooms = (props) => {
         newGalleries.push({room_gallery_image: attachment.id, alt_image: ""});
       });
       setKorpusData({
-        ...korpus,
-        room: korpus.room.map((r) =>
+        ...section,
+        room: section.room.map((r) =>
           r.room_id === id
             ? {
                 ...r,
@@ -336,7 +336,7 @@ const Rooms = (props) => {
     multiFrame.open();
   };
   const deleteImage = (room_id) => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -345,10 +345,10 @@ const Rooms = (props) => {
         : room
     );
 
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
   const deleteGalleryImage = (room_id, index) => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -357,10 +357,10 @@ const Rooms = (props) => {
         : room
     );
 
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
   const openGalleryText = (room_id, index) => {
-    const foundRoom = korpus.room.find((room) => room.room_id === room_id);
+    const foundRoom = section.room.find((room) => room.room_id === room_id);
     setEditedGallery({
       ...foundRoom.room_gallery[index],
       room_id: room_id,
@@ -375,7 +375,7 @@ const Rooms = (props) => {
     });
   };
   const saveGalleryText = () => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === editedGallery.room_id
         ? {
             ...room,
@@ -390,14 +390,14 @@ const Rooms = (props) => {
           }
         : room
     );
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
     setDialogGallery(false);
   };
 
   //Characterics
 
   const setHarackterics = (e, room_id, hi) => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -408,11 +408,11 @@ const Rooms = (props) => {
         : room
     );
 
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
 
   const addHarackteric = (room_id) => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -426,11 +426,11 @@ const Rooms = (props) => {
         : room
     );
 
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
 
   const deleteHarackteric = (room_id, hi) => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -441,7 +441,7 @@ const Rooms = (props) => {
         : room
     );
 
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
 
   // Opus
@@ -450,7 +450,7 @@ const Rooms = (props) => {
     // const markup = draftToHtml(JSON.parse(data));
 
     // const markup = draftToHtml(convertToRaw(data.getCurrentContent()));
-    // const oldData = korpus.room.find((room) => room.room_id === room_id);
+    // const oldData = section.room.find((room) => room.room_id === room_id);
     // if (
     //   oldData.room_info ===
     //   JSON.stringify(convertToRaw(data.getCurrentContent()))
@@ -458,7 +458,7 @@ const Rooms = (props) => {
     //   console.log(oldData.room_info, markup);
     //   return;
     // }
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -468,11 +468,11 @@ const Rooms = (props) => {
           }
         : room
     );
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
   const saveSingleKorpus = () => {
     if (isNew) {
-      const newKorpusRoomsData = korpus.room.map((r) => {
+      const newKorpusRoomsData = section.room.map((r) => {
         let maxAdult = r.adults_number;
         const createTaryfData = (maxAdult) => {
           const newSeasonsData = seasonData.map((s) => {
@@ -504,7 +504,7 @@ const Rooms = (props) => {
         };
       });
 
-      setData([...data, {...korpus, room: newKorpusRoomsData}]);
+      setData([...data, {...section, room: newKorpusRoomsData}]);
       setKorpusNew({
         id: uuid(),
         nazva_korpusu: "",
@@ -514,8 +514,8 @@ const Rooms = (props) => {
       closeDialog(false);
     } else {
       const korpusAddedData = data.map((k) => {
-        if (k.id === korpus.id) {
-          const newKorpusRoomsData = korpus.room.map((r) => {
+        if (k.id === section.id) {
+          const newKorpusRoomsData = section.room.map((r) => {
             let maxAdult = r.adults_number;
             const createTaryfData = (maxAdult) => {
               const newSeasonsData = seasonData.map((s) => {
@@ -548,7 +548,7 @@ const Rooms = (props) => {
                 : createTaryfData(maxAdult)),
             };
           });
-          return {...korpus, room: newKorpusRoomsData};
+          return {...section, room: newKorpusRoomsData};
         }
         return k;
       });
@@ -560,13 +560,13 @@ const Rooms = (props) => {
   const saveContent = (data) => {
     console.log(data);
 
-    const newKorpusData = korpus.room.map((room, i) => {
+    const newKorpusData = section.room.map((room, i) => {
       return {
         ...room,
         room_info: draftToHtml(JSON.parse(data)),
       };
     });
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
   const setRoomOpus = (opus) => {
     if (opus && opus !== "" && opus !== "undefined") {
@@ -581,11 +581,11 @@ const Rooms = (props) => {
       return JSON.stringify(convertToRaw(editorState.getCurrentContent()));
     }
   };
-  //   const memoizedOpus = useMemo(setRoomOpus, [korpus]);
+  //   const memoizedOpus = useMemo(setRoomOpus, [section]);
 
   //adult
   const setHAdultQuantity = (e, room_id) => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -594,11 +594,11 @@ const Rooms = (props) => {
         : room
     );
 
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
   //cheepest
   const setCheepest = (e, room_id) => {
-    const newKorpusData = korpus.room.map((room) =>
+    const newKorpusData = section.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
@@ -607,26 +607,26 @@ const Rooms = (props) => {
         : room
     );
 
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
   //remove room
   const removeRoom = (room_id) => {
-    const newKorpusData = korpus.room.filter(
+    const newKorpusData = section.room.filter(
       (room) => room.room_id !== room_id
     );
 
-    setKorpusData({...korpus, room: newKorpusData});
+    setKorpusData({...section, room: newKorpusData});
   };
 
   const onDragEnd = ( result ) => {
 	if ( result.destination === null ) {
 		return;
 	}
-	const newItems = [ ...korpus.room ];
+	const newItems = [ ...section.room ];
 	const [ reorderedItem ] = newItems.splice( result.source.index, 1 );
 
 	newItems.splice( result.destination.index, 0, reorderedItem );
-	setKorpusData( { ...korpus, room: newItems } );
+	setKorpusData( { ...section, room: newItems } );
 };
   return (
     <div>
@@ -640,7 +640,7 @@ const Rooms = (props) => {
 			{ ...provided.droppableProps }
 			ref={ provided.innerRef }
 		>
-      {korpus.room.map((room, i) => (
+      {section.room.map((room, i) => (
 		<Draggable
 		key={ `room-${ i }` }
 		draggableId={ `room-${ i }` }
@@ -683,7 +683,7 @@ const Rooms = (props) => {
               {room.room_name}
             </Typography>
             <Typography sx={{display: "flex", alignItems: "center"}}>
-              {getMinPrice(korpus, room.room_id)}
+              {getMinPrice(section, room.room_id)}
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -898,7 +898,7 @@ const Rooms = (props) => {
           <IconButtonAdd
             color="inherit"
             size="large"
-            onClick={() => addRoom(korpus.id)}
+            onClick={() => addRoom(section.id)}
           >
             <AddIcon />
           </IconButtonAdd>

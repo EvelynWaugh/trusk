@@ -150,16 +150,16 @@ export default function AdminTruskavetsk() {
 
   //Main states
   const maybeAddIds = (data) => {
-    const newKorpusData = data.map((korpus) => {
-      if (korpus.hasOwnProperty("id")) {
-        return korpus;
+    const newKorpusData = data.map((section) => {
+      if (section.hasOwnProperty("id")) {
+        return section;
       }
-      return {...korpus, id: uuid()};
+      return {...section, id: uuid()};
     });
     return newKorpusData;
   };
   const [data, setData] = useState(
-    TRUSKA_DATA.korpus ? maybeAddIds(TRUSKA_DATA.korpus) : []
+    TRUSKA_DATA.section ? maybeAddIds(TRUSKA_DATA.section) : []
   );
   const [tarifData, setTarifData] = useState(
     get(data, ["0", "room", "0", "tariff"], [])
@@ -188,8 +188,8 @@ export default function AdminTruskavetsk() {
     //Update wp.media
 	useEffect(() => {
 		const attachmentIds = flattenDeep(
-			data.map((korpus) => {
-			  const roomPics = korpus.room.map((r) => {
+			data.map((section) => {
+			  const roomPics = section.room.map((r) => {
 				const gallery =
 				  r.hasOwnProperty("room_gallery") && r.room_gallery
 					? r.room_gallery.map((g) => g.foto_nomera)
@@ -259,8 +259,8 @@ export default function AdminTruskavetsk() {
 
     setChildData(newChildData);
     console.log(newChildData);
-    const newKorpusData = data.map((korpus) => {
-      const newRoomData = korpus.room.map((room) => {
+    const newKorpusData = data.map((section) => {
+      const newRoomData = section.room.map((room) => {
         const taryfNew = room.tariff.map((tariff) => {
           const seasonNew = tariff.booking_period.map((s) => {
             const allChilds = pickBy(s, function (value, key) {
@@ -290,7 +290,7 @@ export default function AdminTruskavetsk() {
           tariff: taryfNew,
         };
       });
-      return {...korpus, room: newRoomData};
+      return {...section, room: newRoomData};
     });
     console.log(newKorpusData);
     setData(newKorpusData);
@@ -305,8 +305,8 @@ export default function AdminTruskavetsk() {
   const saveSingleChild = () => {
     setChildData({...childData, ...editedChild});
 
-    const newKorpusData = data.map((korpus) => {
-      const newRoomData = korpus.room.map((room) => {
+    const newKorpusData = data.map((section) => {
+      const newRoomData = section.room.map((room) => {
         const taryfNew = room.tariff.map((tariff) => {
           const seasonNew = tariff.booking_period.map((s) => {
             const editedChildId = Object.keys(editedChild);
@@ -326,7 +326,7 @@ export default function AdminTruskavetsk() {
           tariff: taryfNew,
         };
       });
-      return {...korpus, room: newRoomData};
+      return {...section, room: newRoomData};
     });
     setData(newKorpusData);
 
@@ -351,8 +351,8 @@ export default function AdminTruskavetsk() {
           kids_tarriff_name: "",
       },
     });
-    const newKorpusData = data.map((korpus) => {
-      const newRoomData = korpus.room.map((room) => {
+    const newKorpusData = data.map((section) => {
+      const newRoomData = section.room.map((room) => {
         const taryfNew = room.tariff.map((tariff) => {
           const seasonNew = tariff.booking_period.map((s) => {
             return {
@@ -368,7 +368,7 @@ export default function AdminTruskavetsk() {
           tariff: taryfNew,
         };
       });
-      return {...korpus, room: newRoomData};
+      return {...section, room: newRoomData};
     });
     setData(newKorpusData);
 
@@ -452,7 +452,7 @@ export default function AdminTruskavetsk() {
     setDialogKorpus(false);
   };
   const openDialogKorpusSingle = (id) => {
-    const foundKorpus = data.find((korpus) => korpus.id === id);
+    const foundKorpus = data.find((section) => section.id === id);
     const chnagedRoomds = foundKorpus.room.map((room) => {
       if (
         room.room_info &&
@@ -493,7 +493,7 @@ export default function AdminTruskavetsk() {
   };
 
   const deleteKorpusSingle = (id) => {
-    const newKorpusData = data.filter((korpus) => korpus.id !== id);
+    const newKorpusData = data.filter((section) => section.id !== id);
     setData(newKorpusData);
   };
   const saveKorpusNewName = (e) => {
@@ -602,7 +602,7 @@ export default function AdminTruskavetsk() {
     // console.log(JSON.stringify(convertToRaw(state.getCurrentContent())));
 
     // const markup = draftToHtml(convertToRaw(data.getCurrentContent()));
-    // const newKorpusData = korpus.room.map((room) =>
+    // const newKorpusData = section.room.map((room) =>
     //   room.room_id === room_id
     //     ? {
     //         ...room,
@@ -643,8 +643,8 @@ export default function AdminTruskavetsk() {
     }
   };
   const saveSingleTaryf = (id) => {
-    const newKorpuses = data.map((korpus) => {
-      const newRooms = korpus.room.map((room) => {
+    const newKorpuses = data.map((section) => {
+      const newRooms = section.room.map((room) => {
         const taryfNew = room.tariff.map((tariff) => {
           //   const newData = tarifData.find((t) => t.id === tariff.id);
           if (tariff.id === id) {
@@ -659,7 +659,7 @@ export default function AdminTruskavetsk() {
         });
         return {...room, tariff: taryfNew};
       });
-      return {...korpus, room: newRooms};
+      return {...section, room: newRooms};
     });
     console.log(newKorpuses);
     setData(newKorpuses);
@@ -744,8 +744,8 @@ export default function AdminTruskavetsk() {
 
     seasonData.splice(indexOfFound, 1, editedSeason);
     setSeasonData(seasonData);
-    const newKorpuses = data.map((korpus) => {
-      const newRooms = korpus.room.map((room) => {
+    const newKorpuses = data.map((section) => {
+      const newRooms = section.room.map((room) => {
         const taryfNew = room.tariff.map((tariff) => {
           const seasonNew = tariff.booking_period.map((season) => {
             const newData = seasonData.find((s) => s.id === season.id);
@@ -768,7 +768,7 @@ export default function AdminTruskavetsk() {
         });
         return {...room, tariff: taryfNew};
       });
-      return {...korpus, room: newRooms};
+      return {...section, room: newRooms};
     });
 
     console.log(newKorpuses);
@@ -794,8 +794,8 @@ export default function AdminTruskavetsk() {
   const saveNewTaryf = () => {
     const editorState = EditorState.createEmpty();
 
-    const newKorpusData = data.map((korpus) => {
-      const newRoomData = korpus.room.map((room) => {
+    const newKorpusData = data.map((section) => {
+      const newRoomData = section.room.map((room) => {
         let maxAdult = room.adults_number;
         const newSeasonsData = seasonData.map((s) => {
           return {
@@ -823,7 +823,7 @@ export default function AdminTruskavetsk() {
           ],
         };
       });
-      return {...korpus, room: newRoomData};
+      return {...section, room: newRoomData};
     });
     setData(newKorpusData);
     setTarifData([
@@ -902,8 +902,8 @@ export default function AdminTruskavetsk() {
   };
   const saveNewSeason = () => {
     console.log(seasonNew);
-    const newKorpusData = data.map((korpus) => {
-      const newRoomData = korpus.room.map((room) => {
+    const newKorpusData = data.map((section) => {
+      const newRoomData = section.room.map((room) => {
         let maxAdult = room.adults_number;
         const newTaryfData = room.tariff.map((tariff) => {
           return {
@@ -931,7 +931,7 @@ export default function AdminTruskavetsk() {
           tariff: newTaryfData,
         };
       });
-      return {...korpus, room: newRoomData};
+      return {...section, room: newRoomData};
     });
     setData(newKorpusData);
     setSeasonData([...seasonData, {...seasonNew, position: seasonData.length}]);
@@ -957,8 +957,8 @@ export default function AdminTruskavetsk() {
     if (applyDelete) {
       const newSeasonData = seasonData.filter((season) => season.id !== id);
       setSeasonData(newSeasonData);
-      const newKorpuses = data.map((korpus) => {
-        const modifiedData = korpus.room.map((r) => {
+      const newKorpuses = data.map((section) => {
+        const modifiedData = section.room.map((r) => {
           const taryfArr = r.tariff.map((t) => {
             const filteredSeason = t.booking_period.filter(
               (s) => s.id !== id
@@ -967,7 +967,7 @@ export default function AdminTruskavetsk() {
           });
           return {...r, tariff: taryfArr};
         });
-        return {...korpus, room: modifiedData};
+        return {...section, room: modifiedData};
       });
       console.log(newKorpuses);
       //   setRoomsData(modifiedData);
@@ -980,15 +980,15 @@ export default function AdminTruskavetsk() {
     if (applyDelete) {
       const newTaryfData = tarifData.filter((t) => t.id !== id);
       setTarifData(newTaryfData);
-      const newKorpuses = data.map((korpus) => {
-        const modifiedData = korpus.room.map((r) => {
+      const newKorpuses = data.map((section) => {
+        const modifiedData = section.room.map((r) => {
           const filteredTaryf = r.tariff.filter((t) => {
             return t.id !== id;
           });
 
           return {...r, tariff: filteredTaryf};
         });
-        return {...korpus, room: modifiedData};
+        return {...section, room: modifiedData};
       });
 
       //   setRoomsData(modifiedData);
@@ -1029,15 +1029,15 @@ export default function AdminTruskavetsk() {
       </Box>
 
       <TabPanel value={tab} index={0}>
-        {data.map((korpus, i) => (
-          <FormWrapper key={`korpus-${i}`}>
+        {data.map((section, i) => (
+          <FormWrapper key={`section-${i}`}>
             <FormControl>
               <TextField
                 disabled
                 type="text"
                 label="Назва"
                 name="nazva_korpusu"
-                value={korpus.nazva_korpusu}
+                value={section.nazva_korpusu}
               />
             </FormControl>
             <FormControl>
@@ -1046,13 +1046,13 @@ export default function AdminTruskavetsk() {
                 type="text"
                 label="Заголовок для секції"
                 name="zagolovok_dlya_sektsiyi_nomeriv_korpusu"
-                value={korpus.zagolovok_dlya_sektsiyi_nomeriv_korpusu}
+                value={section.zagolovok_dlya_sektsiyi_nomeriv_korpusu}
               />
             </FormControl>
             <FormControl>
               <IconButton
                 color="primary"
-                onClick={() => openDialogKorpusSingle(korpus.id)}
+                onClick={() => openDialogKorpusSingle(section.id)}
               >
                 <EditIcon />
               </IconButton>
@@ -1060,7 +1060,7 @@ export default function AdminTruskavetsk() {
             <FormControl>
               <IconButton
                 color="secondary"
-                onClick={() => deleteKorpusSingle(korpus.id)}
+                onClick={() => deleteKorpusSingle(section.id)}
               >
                 <DeleteIcon />
               </IconButton>
@@ -1211,7 +1211,7 @@ export default function AdminTruskavetsk() {
         <TariffsContainer>
           <div>
             {tarifData?.map((tarif, i) => (
-              <FormWrapper key={`korpus-${i}`}>
+              <FormWrapper key={`section-${i}`}>
                 <FormControl>
                   <TextField
                     disabled
@@ -1337,7 +1337,7 @@ export default function AdminTruskavetsk() {
           </div>
           <div>
             {Object.entries(childData)?.map((child, i) => (
-              <FormWrapper key={`korpus-${i}`}>
+              <FormWrapper key={`section-${i}`}>
                 <FormControl>
                   <TextField
                     disabled
@@ -1445,7 +1445,7 @@ export default function AdminTruskavetsk() {
       </TabPanel>
       <TabPanel value={tab} index={2}>
         {seasonData?.map((season, sindex) => (
-          <FormWrapper key={`korpus-${sindex}`}>
+          <FormWrapper key={`section-${sindex}`}>
             <BoxTypo>
               <Typography variant="h6" component="h6">
                 {season.booking_period_name}
@@ -1505,7 +1505,7 @@ export default function AdminTruskavetsk() {
                 />
               </FormControl>
               {editedSeason?.booking_period_dates.map((date_period, i) => (
-                <div key={`korpus-${i}`}>
+                <div key={`section-${i}`}>
                   <FormControl className="trusk_date">
                     <LocalizationProvider
                       dateAdapter={AdapterDateFns}
@@ -1604,7 +1604,7 @@ export default function AdminTruskavetsk() {
                 />
               </FormControl>
               {seasonNew.booking_period_dates.map((date_period, i) => (
-                <div key={`korpus-${i}`}>
+                <div key={`section-${i}`}>
                   <FormControl className="trusk_date">
                     <LocalizationProvider
                       dateAdapter={AdapterDateFns}
