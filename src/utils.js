@@ -15,11 +15,11 @@ export function getMinPrice(korpus, roomId) {
 
   korpus.room.map((room) => {
     if (room.room_id === roomId) {
-      // if(!room.hasOwnProperty('taryf')) {
+      // if(!room.hasOwnProperty('tariff')) {
 
       // }
-      room.taryf?.map((taryf) => {
-        taryf.period_prozhyvannya.map((season) => {
+      room.tariff?.map((tariff) => {
+        tariff.booking_period.map((season) => {
           allPrices.push(
             Object.values(season.tsina_za_doroslyh)
               .filter((price) => price !== "" && price !== "-")

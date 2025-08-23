@@ -169,24 +169,24 @@ const Rooms = (props) => {
   // useEffect(() => {
   //   const newKorpusData = korpus.room.map((room) => {
   //     if (
-  //       room.detalnyj_opys_nomeru &&
-  //       room.detalnyj_opys_nomeru !== "" &&
-  //       room.detalnyj_opys_nomeru !== "undefined"
+  //       room.room_info &&
+  //       room.room_info !== "" &&
+  //       room.room_info !== "undefined"
   //     ) {
-  //       const contentHTML = convertFromHTML(room.detalnyj_opys_nomeru);
+  //       const contentHTML = convertFromHTML(room.room_info);
   //       const state = ContentState.createFromBlockArray(
   //         contentHTML.contentBlocks,
   //         contentHTML.entityMap
   //       );
   //       return {
   //         ...room,
-  //         detalnyj_opys_nomeru: JSON.stringify(convertToRaw(state)),
+  //         room_info: JSON.stringify(convertToRaw(state)),
   //       };
   //     } else {
   //       const editorState = EditorState.createEmpty();
   //       return {
   //         ...room,
-  //         detalnyj_opys_nomeru: JSON.stringify(
+  //         room_info: JSON.stringify(
   //           convertToRaw(editorState.getCurrentContent())
   //         ),
   //       };
@@ -198,18 +198,18 @@ const Rooms = (props) => {
     return wp.media.attachment(id).get("url");
   };
   const emptyRoom = {
-    nazva_nomeru: "",
+    room_name: "",
     room_id: uuid(),
     room_main_foto: "",
-    galereya_nomera: [],
-    klyuchovi_harakterystyky_nomeru: [
+    room_gallery: [],
+    key_features: [
       {
-        harakterystyka: "",
+        feature: "",
       },
     ],
-    detalnyj_opys_nomeru: "",
-    maksymalna_kilkist_doroslyh: "2",
-    najdeshevshyj_nomer: false,
+    room_info: "",
+    adults_number: "2",
+    lovest_price_room: false,
   };
   const addRoom = (id) => {
     setKorpusData({...korpus, room: [...korpus.room, emptyRoom]});
@@ -220,7 +220,7 @@ const Rooms = (props) => {
       room.room_id === room_id
         ? {
             ...room,
-            nazva_nomeru: e.target.value,
+            room_name: e.target.value,
           }
         : room
     );
@@ -314,7 +314,7 @@ const Rooms = (props) => {
       const newGalleries = [];
       selection.each(function (att) {
         let attachment = att.toJSON();
-        newGalleries.push({foto_nomera: attachment.id, pidpys_do_foto: ""});
+        newGalleries.push({room_gallery_image: attachment.id, alt_image: ""});
       });
       setKorpusData({
         ...korpus,
@@ -322,8 +322,8 @@ const Rooms = (props) => {
           r.room_id === id
             ? {
                 ...r,
-                galereya_nomera: [
-                  ...(r.galereya_nomera ? r.galereya_nomera : []),
+                room_gallery: [
+                  ...(r.room_gallery ? r.room_gallery : []),
                   ...newGalleries,
                 ],
               }
@@ -352,7 +352,7 @@ const Rooms = (props) => {
       room.room_id === room_id
         ? {
             ...room,
-            galereya_nomera: room.galereya_nomera.filter((g, i) => index !== i),
+            room_gallery: room.room_gallery.filter((g, i) => index !== i),
           }
         : room
     );
@@ -362,7 +362,7 @@ const Rooms = (props) => {
   const openGalleryText = (room_id, index) => {
     const foundRoom = korpus.room.find((room) => room.room_id === room_id);
     setEditedGallery({
-      ...foundRoom.galereya_nomera[index],
+      ...foundRoom.room_gallery[index],
       room_id: room_id,
       index: index,
     });
@@ -371,7 +371,7 @@ const Rooms = (props) => {
   const updateGalleryText = (e) => {
     setEditedGallery({
       ...editedGallery,
-      pidpys_do_foto: e.target.value,
+      alt_image: e.target.value,
     });
   };
   const saveGalleryText = () => {
@@ -379,11 +379,11 @@ const Rooms = (props) => {
       room.room_id === editedGallery.room_id
         ? {
             ...room,
-            galereya_nomera: room.galereya_nomera.map((ch, i) =>
+            room_gallery: room.room_gallery.map((ch, i) =>
               editedGallery.index === i
                 ? {
-                    foto_nomera: editedGallery.foto_nomera,
-                    pidpys_do_foto: editedGallery.pidpys_do_foto,
+                    room_gallery_image: editedGallery.room_gallery_image,
+                    alt_image: editedGallery.alt_image,
                   }
                 : ch
             ),
@@ -401,8 +401,8 @@ const Rooms = (props) => {
       room.room_id === room_id
         ? {
             ...room,
-            klyuchovi_harakterystyky_nomeru: room.klyuchovi_harakterystyky_nomeru.map(
-              (ch, i) => (hi === i ? {harakterystyka: e.target.value} : ch)
+            key_features: room.key_features.map(
+              (ch, i) => (hi === i ? {feature: e.target.value} : ch)
             ),
           }
         : room
@@ -416,11 +416,11 @@ const Rooms = (props) => {
       room.room_id === room_id
         ? {
             ...room,
-            klyuchovi_harakterystyky_nomeru: [
-              ...(room.klyuchovi_harakterystyky_nomeru
-                ? room.klyuchovi_harakterystyky_nomeru
+            key_features: [
+              ...(room.key_features
+                ? room.key_features
                 : []),
-              {harakterystyka: ""},
+              {feature: ""},
             ],
           }
         : room
@@ -434,7 +434,7 @@ const Rooms = (props) => {
       room.room_id === room_id
         ? {
             ...room,
-            klyuchovi_harakterystyky_nomeru: room.klyuchovi_harakterystyky_nomeru.filter(
+            key_features: room.key_features.filter(
               (ch, i) => hi !== i
             ),
           }
@@ -452,17 +452,17 @@ const Rooms = (props) => {
     // const markup = draftToHtml(convertToRaw(data.getCurrentContent()));
     // const oldData = korpus.room.find((room) => room.room_id === room_id);
     // if (
-    //   oldData.detalnyj_opys_nomeru ===
+    //   oldData.room_info ===
     //   JSON.stringify(convertToRaw(data.getCurrentContent()))
     // ) {
-    //   console.log(oldData.detalnyj_opys_nomeru, markup);
+    //   console.log(oldData.room_info, markup);
     //   return;
     // }
     const newKorpusData = korpus.room.map((room) =>
       room.room_id === room_id
         ? {
             ...room,
-            detalnyj_opys_nomeru_raw: JSON.stringify(
+            room_info_raw: JSON.stringify(
               convertToRaw(data.getCurrentContent())
             ),
           }
@@ -473,7 +473,7 @@ const Rooms = (props) => {
   const saveSingleKorpus = () => {
     if (isNew) {
       const newKorpusRoomsData = korpus.room.map((r) => {
-        let maxAdult = r.maksymalna_kilkist_doroslyh;
+        let maxAdult = r.adults_number;
         const createTaryfData = (maxAdult) => {
           const newSeasonsData = seasonData.map((s) => {
             return {
@@ -490,17 +490,17 @@ const Rooms = (props) => {
             };
           });
           const newTarifData = tarifData.map((tarif) => {
-            return {...tarif, period_prozhyvannya: newSeasonsData};
+            return {...tarif, booking_period: newSeasonsData};
           });
-          return {taryf: newTarifData};
+          return {tariff: newTarifData};
         };
 
         return {
           ...r,
-          detalnyj_opys_nomeru: draftToHtml(
-            JSON.parse(r.detalnyj_opys_nomeru_raw)
+          room_info: draftToHtml(
+            JSON.parse(r.room_info_raw)
           ),
-          ...(r.hasOwnProperty("taryf") ? r.taryf : createTaryfData(maxAdult)),
+          ...(r.hasOwnProperty("tariff") ? r.tariff : createTaryfData(maxAdult)),
         };
       });
 
@@ -516,7 +516,7 @@ const Rooms = (props) => {
       const korpusAddedData = data.map((k) => {
         if (k.id === korpus.id) {
           const newKorpusRoomsData = korpus.room.map((r) => {
-            let maxAdult = r.maksymalna_kilkist_doroslyh;
+            let maxAdult = r.adults_number;
             const createTaryfData = (maxAdult) => {
               const newSeasonsData = seasonData.map((s) => {
                 return {
@@ -533,18 +533,18 @@ const Rooms = (props) => {
                 };
               });
               const newTarifData = tarifData.map((tarif) => {
-                return {...tarif, period_prozhyvannya: newSeasonsData};
+                return {...tarif, booking_period: newSeasonsData};
               });
-              return {taryf: newTarifData};
+              return {tariff: newTarifData};
             };
 
             return {
               ...r,
-              detalnyj_opys_nomeru: draftToHtml(
-                JSON.parse(r.detalnyj_opys_nomeru_raw)
+              room_info: draftToHtml(
+                JSON.parse(r.room_info_raw)
               ),
-              ...(r.hasOwnProperty("taryf")
-                ? r.taryf
+              ...(r.hasOwnProperty("tariff")
+                ? r.tariff
                 : createTaryfData(maxAdult)),
             };
           });
@@ -563,7 +563,7 @@ const Rooms = (props) => {
     const newKorpusData = korpus.room.map((room, i) => {
       return {
         ...room,
-        detalnyj_opys_nomeru: draftToHtml(JSON.parse(data)),
+        room_info: draftToHtml(JSON.parse(data)),
       };
     });
     setKorpusData({...korpus, room: newKorpusData});
@@ -589,7 +589,7 @@ const Rooms = (props) => {
       room.room_id === room_id
         ? {
             ...room,
-            maksymalna_kilkist_doroslyh: e.target.value,
+            adults_number: e.target.value,
           }
         : room
     );
@@ -602,7 +602,7 @@ const Rooms = (props) => {
       room.room_id === room_id
         ? {
             ...room,
-            najdeshevshyj_nomer: e.target.checked,
+            lovest_price_room: e.target.checked,
           }
         : room
     );
@@ -680,7 +680,7 @@ const Rooms = (props) => {
               component="p"
               sx={{marginRight: "10px", display: "flex", alignItems: "center"}}
             >
-              {room.nazva_nomeru}
+              {room.room_name}
             </Typography>
             <Typography sx={{display: "flex", alignItems: "center"}}>
               {getMinPrice(korpus, room.room_id)}
@@ -691,7 +691,7 @@ const Rooms = (props) => {
               <FormControl sx={{marginRight: "10px"}}>
                 <TextField
                   label="Назва номеру"
-                  value={room.nazva_nomeru}
+                  value={room.room_name}
                   onChange={(e) => setRoomName(e, room.room_id)}
                 />
               </FormControl>
@@ -743,11 +743,11 @@ const Rooms = (props) => {
               >
                 <UploadIcon />
               </UploadContainer>
-              {room.galereya_nomera &&
-                room.galereya_nomera.map((g, i) => (
+              {room.room_gallery &&
+                room.room_gallery.map((g, i) => (
                   <UploadContainer key={`upload-${i}`}>
                     <img
-                      src={getImageUrl(g.foto_nomera)}
+                      src={getImageUrl(g.room_gallery_image)}
                       style={{
                         maxWidth: "100%",
                         height: "100%",
@@ -782,7 +782,7 @@ const Rooms = (props) => {
                   <div style={{marginBottom: "10px"}}>
                     <TextField
                       label="Назва"
-                      value={editedGallery?.pidpys_do_foto}
+                      value={editedGallery?.alt_image}
                       onChange={updateGalleryText}
                     />
                   </div>
@@ -800,13 +800,13 @@ const Rooms = (props) => {
               <Typography variant="h5" component="h5">
                 Характеристики
               </Typography>
-              {room.klyuchovi_harakterystyky_nomeru &&
-                room.klyuchovi_harakterystyky_nomeru.map((h, hi) => (
+              {room.key_features &&
+                room.key_features.map((h, hi) => (
                   <CharacteFormControl key={`character-${hi}`}>
                     <TextField
                       type="text"
                       label={`Характеристика-${hi + 1}`}
-                      value={h.harakterystyka}
+                      value={h.feature}
                       onChange={(e) => setHarackterics(e, room.room_id, hi)}
                     />
                     <IconButton
@@ -842,7 +842,7 @@ const Rooms = (props) => {
                   //   ref={refArray[i].ref}
                   //   onSave={saveContent}
                   onChange={(data) => saveTextEditor(data, room.room_id)}
-                  defaultValue={room.detalnyj_opys_nomeru}
+                  defaultValue={room.room_info}
                 />
               </ThemeProvider>
             </div>
@@ -851,7 +851,7 @@ const Rooms = (props) => {
                 <TextField
                   type="number"
                   label="Кількість дорослих"
-                  value={room.maksymalna_kilkist_doroslyh}
+                  value={room.adults_number}
                   onChange={(e) => setHAdultQuantity(e, room.room_id)}
                 />
               </FormControl>
@@ -860,7 +860,7 @@ const Rooms = (props) => {
               <FormControlLabel
                 control={
                   <Switch
-                    checked={room.najdeshevshyj_nomer}
+                    checked={room.lovest_price_room}
                     onChange={(e) => setCheepest(e, room.room_id)}
                   />
                 }

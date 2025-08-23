@@ -168,231 +168,210 @@ function register_hotel_metabox() {
 
 ### Hotel Information Schema
 ```json
-[
-    {
-        "id": "d3ab7e0e-62eb-43c3-af7f-be8bbfbd01e6",
-        "nazva_korpusu": "Виват",
-        "zagolovok_dlya_sektsiyi_nomeriv_korpusu": "Номерной фонд",
-        "room": [
+{
+        "rooms": [
             {
                 "0": {
                     "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                    "nazva_taryfu": "Лікувальна путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": false,
-                    "period_prozhyvannya": [
+                    "tariff_name": "Лікувальна путівка",
+                    "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
+                    "tariff_description_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                    "lovest_price_tariff": false,
+                    "booking_period": [
                         {
                             "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
+                            "booking_period_name": "Низький сезон",
                             "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
+                            "current_period": false,
+                            "booking_period_dates": [
                                 {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
+                                    "booking_period_begin": "20.01.2025",
+                                    "booking_period_end": "01.04.2025"
                                 }
                             ],
                             "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "1800"
+                            "price_for_adult": {
+                                "1-adult": "1800"
                             },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "-"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "-"
-                            }
+                            "dodatkove_mistse": "",
+                            "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                         }
                     ]
                 },
                 "1": {
                     "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                    "nazva_taryfu": "Оздоровча путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": true,
-                    "period_prozhyvannya": [
+                    "tariff_name": "Оздоровча путівка",
+                    "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
+                    "tariff_description_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                    "lovest_price_tariff": true,
+                    "booking_period": [
                         {
                             "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
+                            "booking_period_name": "Низький сезон",
                             "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
+                            "current_period": false,
+                            "booking_period_dates": [
                                 {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
+                                    "booking_period_begin": "20.01.2025",
+                                    "booking_period_end": "01.04.2025"
                                 }
                             ],
                             "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "1500"
+                            "price_for_adult": {
+                                "1-adult": "1500"
                             },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "-"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "-"
-                            }
+                            "dodatkove_mistse": "",
+                           "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                         }
                     ]
                 },
-                "nazva_nomeru": "Одноместный стандарт",
+                "room_name": "Одноместный стандарт",
                 "room_id": "f3e2b49d-236e-456d-b83f-67c4ed95825b",
-                "golovne_foto_nomera": 15981,
-                "galereya_nomera": [
+                "room_main_foto": 15981,
+                "room_gallery": [
                     {
-                        "foto_nomera": 15982,
-                        "pidpys_do_foto": ""
+                        "room_gallery_image": 15982,
+                        "alt_image": ""
                     },
                     {
-                        "foto_nomera": 15983,
-                        "pidpys_do_foto": ""
+                        "room_gallery_image": 15983,
+                        "alt_image": ""
                     },
                     {
-                        "foto_nomera": 15984,
-                        "pidpys_do_foto": ""
+                        "room_gallery_image": 15984,
+                        "alt_image": ""
                     },
                     {
-                        "foto_nomera": 15985,
-                        "pidpys_do_foto": ""
+                        "room_gallery_image": 15985,
+                        "alt_image": ""
                     }
                 ],
-                "klyuchovi_harakterystyky_nomeru": [
+                "key_features": [
                     {
-                        "harakterystyka": "Площадь: 14 кв.м."
+                        "feature": "Площадь: 14 кв.м."
                     },
                     {
-                        "harakterystyka": "Полуторная кровать"
+                        "feature": "Полуторная кровать"
                     },
                     {
-                        "harakterystyka": "Балкон"
+                        "feature": "Балкон"
                     }
                 ],
-                "detalnyj_opys_nomeru": "<p><strong>В номері:</strong></p>\n<ul>\n<li>14 кв.м., 1 комната, ремонт</li>\n<li>полуторная кровать 140*200</li>\n<li>санузел - душ, полотенца</li>\n<li>холодильник, ТV, чайник, фен</li>\n</ul>\n",
-                "maksymalna_kilkist_doroslyh": "1",
-                "najdeshevshyj_nomer": false,
-                "detalnyj_opys_nomeru_raw": "{\"blocks\":[{\"key\":\"8ic36\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"6g218\",\"text\":\"14 кв.м., 1 комната, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"555a5\",\"text\":\"полуторная кровать 140*200\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"3dt38\",\"text\":\"санузел - душ, полотенца\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"8ui51\",\"text\":\"холодильник, ТV, чайник, фен\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                "taryf": [
+                "room_info": "<p><strong>В номері:</strong></p>\n<ul>\n<li>14 кв.м., 1 комната, ремонт</li>\n<li>полуторная кровать 140*200</li>\n<li>санузел - душ, полотенца</li>\n<li>холодильник, ТV, чайник, фен</li>\n</ul>\n",
+                "adults_number": "1",
+                "lovest_price_room": false,
+                "room_info_raw": "{\"blocks\":[{\"key\":\"8ic36\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"6g218\",\"text\":\"14 кв.м., 1 комната, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"555a5\",\"text\":\"полуторная кровать 140*200\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"3dt38\",\"text\":\"санузел - душ, полотенца\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"8ui51\",\"text\":\"холодильник, ТV, чайник, фен\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                "tariff": [
                     {
                         "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                        "nazva_taryfu": "Лечебная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": false,
-                        "period_prozhyvannya": [
+                        "tariff_name": "Лечебная путевка",
+                        "tariff_description": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
+                        "tariff_description_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                        "lovest_price_tariff": false,
+                        "booking_period": [
                             {
                                 "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
+                                "booking_period_name": "Низький сезон",
                                 "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
+                                "current_period": false,
+                                "booking_period_dates": [
                                     {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
+                                        "booking_period_begin": "20.01.2025",
+                                        "booking_period_end": "01.05.2025"
                                     }
                                 ],
                                 "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "1800"
+                                "price_for_adult": {
+                                    "1-adult": "1800"
                                 },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "-"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "-"
-                                }
+                                "dodatkove_mistse": "",
+                                "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
+                                
                             },
                             {
                                 "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
+                                "booking_period_name": "Высокий сезон",
                                 "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
+                                "current_period": false,
+                                "booking_period_dates": [
                                     {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
+                                        "booking_period_begin": "01.05.2025",
+                                        "booking_period_end": "01.10.2025"
                                     }
                                 ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "2400"
+                                "price_for_adult": {
+                                    "1-adult": "2400"
                                 },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "-"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "-"
-                                }
+                                "dodatkove_mistse": "",
+                                "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                             }
                         ]
                     },
                     {
                         "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                        "nazva_taryfu": "Оздоровительная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": true,
-                        "period_prozhyvannya": [
+                        "tariff_name": "Оздоровительная путевка",
+                        "tariff_description": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
+                        "tariff_description_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                        "lovest_price_tariff": true,
+                        "booking_period": [
                             {
                                 "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
+                                "booking_period_name": "Низький сезон",
                                 "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
+                                "current_period": false,
+                                "booking_period_dates": [
                                     {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
+                                        "booking_period_begin": "20.01.2025",
+                                        "booking_period_end": "01.05.2025"
                                     }
                                 ],
                                 "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "1500"
+                                "price_for_adult": {
+                                    "1-adult": "1500"
                                 },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "-"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "-"
-                                }
+                                "dodatkove_mistse": "",
+                                "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                             },
                             {
                                 "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
+                                "booking_period_name": "Высокий сезон",
                                 "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
+                                "current_period": false,
+                                "booking_period_dates": [
                                     {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
+                                        "booking_period_begin": "01.05.2025",
+                                        "booking_period_end": "01.10.2025"
                                     }
                                 ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "1800"
+                                "price_for_adult": {
+                                    "1-adult": "1800"
                                 },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "-"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "-"
-                                }
+                                "dodatkove_mistse": "",
+                                "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                             }
                         ]
                     }
@@ -401,1156 +380,219 @@ function register_hotel_metabox() {
             {
                 "0": {
                     "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                    "nazva_taryfu": "Лікувальна путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": false,
-                    "period_prozhyvannya": [
+                    "tariff_name": "Лікувальна путівка",
+                    "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
+                    "tariff_description_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                    "lovest_price_tariff": false,
+                    "booking_period": [
                         {
                             "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
+                            "booking_period_name": "Низький сезон",
                             "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
+                            "current_period": false,
+                            "booking_period_dates": [
                                 {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
+                                    "booking_period_begin": "20.01.2025",
+                                    "booking_period_end": "01.04.2025"
                                 }
                             ],
                             "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "1800",
-                                "2_adult": "3100"
+                            "price_for_adult": {
+                                "1-adult": "1800",
+                                "2-adult": "3100"
                             },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1500"
-                            }
+                            "dodatkove_mistse": "",
+                            "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                         }
                     ]
                 },
                 "1": {
                     "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                    "nazva_taryfu": "Оздоровча путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": true,
-                    "period_prozhyvannya": [
+                    "tariff_name": "Оздоровча путівка",
+                    "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
+                    "tariff_description_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                    "lovest_price_tariff": true,
+                    "booking_period": [
                         {
                             "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
+                            "booking_period_name": "Низький сезон",
                             "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
+                            "current_period": false,
+                            "booking_period_dates": [
                                 {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
+                                    "booking_period_begin": "20.01.2025",
+                                    "booking_period_end": "01.04.2025"
                                 }
                             ],
                             "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "1500",
-                                "2_adult": "2200"
+                            "price_for_adult": {
+                                "1-adult": "1500",
+                                "2-adult": "2200"
                             },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1000"
-                            }
+                            "dodatkove_mistse": "",
+                            "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                         }
                     ]
                 },
-                "nazva_nomeru": "Двухместный стандарт",
+                "room_name": "Двухместный стандарт",
                 "room_id": "8e24315c-7fae-4ae3-9f79-31aa5e30f848",
-                "golovne_foto_nomera": 15986,
-                "galereya_nomera": [
+                "room_main_foto": 15986,
+                "room_gallery": [
                     {
-                        "foto_nomera": 15987,
-                        "pidpys_do_foto": ""
+                        "room_gallery_image": 15987,
+                        "alt_image": ""
                     },
                     {
-                        "foto_nomera": 15988,
-                        "pidpys_do_foto": ""
+                        "room_gallery_image": 15988,
+                        "alt_image": ""
                     },
                     {
-                        "foto_nomera": 15989,
-                        "pidpys_do_foto": ""
+                        "room_gallery_image": 15989,
+                        "alt_image": ""
                     },
                     {
-                        "foto_nomera": 15990,
-                        "pidpys_do_foto": ""
+                        "room_gallery_image": 15990,
+                        "alt_image": ""
                     }
                 ],
-                "klyuchovi_harakterystyky_nomeru": [
+                "key_features": [
                     {
-                        "harakterystyka": "Площадь: 18 кв.м."
+                        "feature": "Площадь: 18 кв.м."
                     },
                     {
-                        "harakterystyka": "Две односпальные кровати"
+                        "feature": "Две односпальные кровати"
                     },
                     {
-                        "harakterystyka": "балкон"
+                        "feature": "балкон"
                     }
                 ],
-                "detalnyj_opys_nomeru": "<p><strong>В номері:</strong></p>\n<ul>\n<li>18 кв.м., 1 комната, ремонт</li>\n<li>две односпальные кровати 90*200см.</li>\n<li>санузел - душ, полотенца</li>\n<li>холодильник, ТV, чайник, фен</li>\n</ul>\n",
-                "maksymalna_kilkist_doroslyh": "2",
-                "najdeshevshyj_nomer": false,
-                "detalnyj_opys_nomeru_raw": "{\"blocks\":[{\"key\":\"33g1b\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"4agjj\",\"text\":\"18 кв.м., 1 комната, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"dp8cp\",\"text\":\"две односпальные кровати 90*200см.\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"dcuag\",\"text\":\"санузел - душ, полотенца\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"1b18e\",\"text\":\"холодильник, ТV, чайник, фен\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                "taryf": [
+                "room_info": "<p><strong>В номері:</strong></p>\n<ul>\n<li>18 кв.м., 1 комната, ремонт</li>\n<li>две односпальные кровати 90*200см.</li>\n<li>санузел - душ, полотенца</li>\n<li>холодильник, ТV, чайник, фен</li>\n</ul>\n",
+                "adults_number": "2",
+                "lovest_price_room": false,
+                "room_info_raw": "{\"blocks\":[{\"key\":\"33g1b\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"4agjj\",\"text\":\"18 кв.м., 1 комната, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"dp8cp\",\"text\":\"две односпальные кровати 90*200см.\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"dcuag\",\"text\":\"санузел - душ, полотенца\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"1b18e\",\"text\":\"холодильник, ТV, чайник, фен\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                "tariff": [
                     {
                         "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                        "nazva_taryfu": "Лечебная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": false,
-                        "period_prozhyvannya": [
+                        "tariff_name": "Лечебная путевка",
+                        "tariff_description": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
+                        "tariff_description_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                        "lovest_price_tariff": false,
+                        "booking_period": [
                             {
                                 "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
+                                "booking_period_name": "Низький сезон",
                                 "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
+                                "current_period": false,
+                                "booking_period_dates": [
                                     {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
+                                        "booking_period_begin": "20.01.2025",
+                                        "booking_period_end": "01.05.2025"
                                     }
                                 ],
                                 "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "1800",
-                                    "2_adult": "3100"
+                                "price_for_adult": {
+                                    "1-adult": "1800",
+                                    "2-adult": "3100"
                                 },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1500"
-                                }
+                                "dodatkove_mistse": "",
+                               "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                             },
                             {
                                 "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
+                                "booking_period_name": "Высокий сезон",
                                 "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
+                                "current_period": false,
+                                "booking_period_dates": [
                                     {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
+                                        "booking_period_begin": "01.05.2025",
+                                        "booking_period_end": "01.10.2025"
                                     }
                                 ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "2400",
-                                    "2_adult": "4000"
+                                "price_for_adult": {
+                                    "1-adult": "2400",
+                                    "2-adult": "4000"
                                 },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
+                                "dodatkove_mistse": "",
+                                "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                             }
                         ]
                     },
                     {
                         "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                        "nazva_taryfu": "Оздоровительная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": true,
-                        "period_prozhyvannya": [
+                        "tariff_name": "Оздоровительная путевка",
+                        "tariff_description": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
+                        "tariff_description_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+                        "lovest_price_tariff": true,
+                        "booking_period": [
                             {
                                 "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
+                                "booking_period_name": "Низький сезон",
                                 "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
+                                "current_period": false,
+                                "booking_period_dates": [
                                     {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
+                                        "booking_period_begin": "20.01.2025",
+                                        "booking_period_end": "01.05.2025"
                                     }
                                 ],
                                 "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "1500",
-                                    "2_adult": "2200"
+                                "price_for_adult": {
+                                    "1-adult": "1500",
+                                    "2-adult": "2200"
                                 },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1000"
-                                }
+                                "dodatkove_mistse": "",
+                               "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                             },
                             {
                                 "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
+                                "booking_period_name": "Высокий сезон",
                                 "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
+                                "current_period": false,
+                                "booking_period_dates": [
                                     {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
+                                        "booking_period_begin": "01.05.2025",
+                                        "booking_period_end": "01.10.2025"
                                     }
                                 ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "-",
-                                    "2_adult": "2500"
+                                "price_for_adult": {
+                                    "1-adult": "-",
+                                    "2-adult": "2500"
                                 },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
+                                "dodatkove_mistse": "",
+                                "price_for_child": [
+                                    {
+                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
+                                    "kids_tarriff_price": "-"
+                                }],
                             }
                         ]
                     }
                 ]
             },
-            {
-                "0": {
-                    "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                    "nazva_taryfu": "Лікувальна путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": false,
-                    "period_prozhyvannya": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
-                            "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
-                                {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "2300",
-                                "2_adult": "3400"
-                            },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1500"
-                            }
-                        }
-                    ]
-                },
-                "1": {
-                    "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                    "nazva_taryfu": "Оздоровча путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": true,
-                    "period_prozhyvannya": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
-                            "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
-                                {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "1800",
-                                "2_adult": "2500"
-                            },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1000"
-                            }
-                        }
-                    ]
-                },
-                "nazva_nomeru": "Двухместный стандарт А",
-                "room_id": "ad152e6c-d101-4c73-8c0e-415587300a1a",
-                "golovne_foto_nomera": 15991,
-                "galereya_nomera": [
-                    {
-                        "foto_nomera": 15992,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 15993,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 15994,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 15995,
-                        "pidpys_do_foto": ""
-                    }
-                ],
-                "klyuchovi_harakterystyky_nomeru": [
-                    {
-                        "harakterystyka": "Площадь: 24 кв.м."
-                    },
-                    {
-                        "harakterystyka": "Двуспальная кровать"
-                    },
-                    {
-                        "harakterystyka": "Балкон"
-                    }
-                ],
-                "detalnyj_opys_nomeru": "<p><strong>В номері:</strong></p>\n<ul>\n<li>26 кв.м., 1 комната, ремонт</li>\n<li>двуспальная кровать 160*200см.</li>\n<li>санузел - душ, полотенца</li>\n<li>холодильник, ТV, чайник, фен</li>\n</ul>\n",
-                "maksymalna_kilkist_doroslyh": "2",
-                "najdeshevshyj_nomer": false,
-                "detalnyj_opys_nomeru_raw": "{\"blocks\":[{\"key\":\"fgqfs\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"9326q\",\"text\":\"26 кв.м., 1 комната, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"7kapv\",\"text\":\"двуспальная кровать 160*200см.\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"ao2cb\",\"text\":\"санузел - душ, полотенца\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"8phuq\",\"text\":\"холодильник, ТV, чайник, фен\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                "taryf": [
-                    {
-                        "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                        "nazva_taryfu": "Лечебная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": false,
-                        "period_prozhyvannya": [
-                            {
-                                "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
-                                    }
-                                ],
-                                "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "2300",
-                                    "2_adult": "3400"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1500"
-                                }
-                            },
-                            {
-                                "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
-                                    }
-                                ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "2800",
-                                    "2_adult": "4200"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                        "nazva_taryfu": "Оздоровительная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": true,
-                        "period_prozhyvannya": [
-                            {
-                                "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
-                                    }
-                                ],
-                                "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "1800",
-                                    "2_adult": "2500"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1000"
-                                }
-                            },
-                            {
-                                "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
-                                    }
-                                ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "-",
-                                    "2_adult": "2600"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "0": {
-                    "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                    "nazva_taryfu": "Лікувальна путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": false,
-                    "period_prozhyvannya": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
-                            "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
-                                {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "2500",
-                                "2_adult": "3600"
-                            },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1500"
-                            }
-                        }
-                    ]
-                },
-                "1": {
-                    "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                    "nazva_taryfu": "Оздоровча путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": true,
-                    "period_prozhyvannya": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
-                            "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
-                                {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "2200",
-                                "2_adult": "2600"
-                            },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1000"
-                            }
-                        }
-                    ]
-                },
-                "nazva_nomeru": "Двухместный полулюкс",
-                "room_id": "bf686d62-170c-442d-a732-83419ad191c4",
-                "golovne_foto_nomera": 15996,
-                "galereya_nomera": [
-                    {
-                        "foto_nomera": 15997,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 15998,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 15999,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 16038,
-                        "pidpys_do_foto": ""
-                    }
-                ],
-                "klyuchovi_harakterystyky_nomeru": [
-                    {
-                        "harakterystyka": "Площадь: 26 кв.м."
-                    },
-                    {
-                        "harakterystyka": "Двуспальная кровать "
-                    },
-                    {
-                        "harakterystyka": "Балкон"
-                    }
-                ],
-                "detalnyj_opys_nomeru": "<p><strong>В номері:</strong></p>\n<ul>\n<li>26 кв.м., 1 комната, ремонт</li>\n<li>двуспальная кровать 160*200см.</li>\n<li>санузел - душ, полотенца</li>\n<li>холодильник, ТV, чайник, фен</li>\n</ul>\n",
-                "maksymalna_kilkist_doroslyh": "2",
-                "najdeshevshyj_nomer": false,
-                "detalnyj_opys_nomeru_raw": "{\"blocks\":[{\"key\":\"bq9n3\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"7m0ue\",\"text\":\"26 кв.м., 1 комната, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"c30si\",\"text\":\"двуспальная кровать 160*200см.\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"8d4lq\",\"text\":\"санузел - душ, полотенца\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"5ivsc\",\"text\":\"холодильник, ТV, чайник, фен\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                "taryf": [
-                    {
-                        "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                        "nazva_taryfu": "Лечебная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": false,
-                        "period_prozhyvannya": [
-                            {
-                                "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
-                                    }
-                                ],
-                                "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "2500",
-                                    "2_adult": "3600"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1500"
-                                }
-                            },
-                            {
-                                "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
-                                    }
-                                ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "3000",
-                                    "2_adult": "4400"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                        "nazva_taryfu": "Оздоровительная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": true,
-                        "period_prozhyvannya": [
-                            {
-                                "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
-                                    }
-                                ],
-                                "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "2200",
-                                    "2_adult": "2600"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1000"
-                                }
-                            },
-                            {
-                                "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
-                                    }
-                                ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "-",
-                                    "2_adult": "2800"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "0": {
-                    "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                    "nazva_taryfu": "Лікувальна путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": false,
-                    "period_prozhyvannya": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
-                            "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
-                                {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "2900",
-                                "2_adult": "4000"
-                            },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1500"
-                            }
-                        }
-                    ]
-                },
-                "1": {
-                    "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                    "nazva_taryfu": "Оздоровча путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": true,
-                    "period_prozhyvannya": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
-                            "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
-                                {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "2400",
-                                "2_adult": "2800"
-                            },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1000"
-                            }
-                        }
-                    ]
-                },
-                "nazva_nomeru": "Однокомнатный люкс",
-                "room_id": "b6254836-26a8-4708-8a0e-8366c06aa3cf",
-                "golovne_foto_nomera": 16000,
-                "galereya_nomera": [
-                    {
-                        "foto_nomera": 16001,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 16002,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 16003,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 16039,
-                        "pidpys_do_foto": ""
-                    }
-                ],
-                "klyuchovi_harakterystyky_nomeru": [
-                    {
-                        "harakterystyka": "Площадь: 30 кв.м."
-                    },
-                    {
-                        "harakterystyka": "Двуспальная кровать и диван "
-                    },
-                    {
-                        "harakterystyka": "Балкон"
-                    }
-                ],
-                "detalnyj_opys_nomeru": "<p><strong>В номері:</strong></p>\n<ul>\n<li>30 кв.м., 1 комната, ремонт</li>\n<li>двуспальная кровать 160*200см., диван</li>\n<li>санузел - душ, полотенца, халаты</li>\n<li>холодильник, ТV, чайник, фен, кондиционер</li>\n</ul>\n",
-                "maksymalna_kilkist_doroslyh": "2",
-                "najdeshevshyj_nomer": false,
-                "detalnyj_opys_nomeru_raw": "{\"blocks\":[{\"key\":\"7eo7t\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"blcm5\",\"text\":\"30 кв.м., 1 комната, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"eia9e\",\"text\":\"двуспальная кровать 160*200см., диван\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"cockh\",\"text\":\"санузел - душ, полотенца, халаты\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"748fe\",\"text\":\"холодильник, ТV, чайник, фен, кондиционер\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                "taryf": [
-                    {
-                        "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                        "nazva_taryfu": "Лечебная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": false,
-                        "period_prozhyvannya": [
-                            {
-                                "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
-                                    }
-                                ],
-                                "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "2900",
-                                    "2_adult": "4000"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1500"
-                                }
-                            },
-                            {
-                                "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
-                                    }
-                                ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "3400",
-                                    "2_adult": "4800"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                        "nazva_taryfu": "Оздоровительная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": true,
-                        "period_prozhyvannya": [
-                            {
-                                "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
-                                    }
-                                ],
-                                "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "2400",
-                                    "2_adult": "2800"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1000"
-                                }
-                            },
-                            {
-                                "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
-                                    }
-                                ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "-",
-                                    "2_adult": "3000"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "0": {
-                    "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                    "nazva_taryfu": "Лікувальна путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": false,
-                    "period_prozhyvannya": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
-                            "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
-                                {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "3300",
-                                "2_adult": "4400"
-                            },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1500"
-                            }
-                        }
-                    ]
-                },
-                "1": {
-                    "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                    "nazva_taryfu": "Оздоровча путівка",
-                    "opys_taryfa": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
-                    "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                    "najdeshevshyj_taryf": true,
-                    "period_prozhyvannya": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "nazva_periodu": "Низький сезон",
-                            "on_of_period": "yes",
-                            "potochnyj_period": false,
-                            "daty_periodu": [
-                                {
-                                    "data_pochatku_periodu": "20.01.2025",
-                                    "data_kintsya_periodu": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "tsina_za_doroslyh": {
-                                "1_adult": "3000",
-                                "2_adult": "3200"
-                            },
-                            "dodatkovi_mistsya": "",
-                            "dytyachyj_taryf": {
-                                "nazva_vik_ditej": "Дод. місце з 4-10 років без. лікув.",
-                                "tsina_dytyachogo_taryfu": "800"
-                            },
-                            "dytyachyj_taryf_2": {
-                                "nazva_vik_ditej": "Дод. місце з 10 років ",
-                                "tsina_dytyachogo_taryfu": "1000"
-                            }
-                        }
-                    ]
-                },
-                "nazva_nomeru": "Двухкомнатный люкс",
-                "room_id": "b7e8b4f7-122b-4e44-bfe9-f1c9653d3e1a",
-                "golovne_foto_nomera": 16004,
-                "galereya_nomera": [
-                    {
-                        "foto_nomera": 16005,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 16006,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 16007,
-                        "pidpys_do_foto": ""
-                    },
-                    {
-                        "foto_nomera": 16040,
-                        "pidpys_do_foto": ""
-                    }
-                ],
-                "klyuchovi_harakterystyky_nomeru": [
-                    {
-                        "harakterystyka": "Площадь: 36 кв.м."
-                    },
-                    {
-                        "harakterystyka": "Двуспальная кровать и диван "
-                    },
-                    {
-                        "harakterystyka": "Балкон"
-                    }
-                ],
-                "detalnyj_opys_nomeru": "<p><strong>В номері:</strong></p>\n<ul>\n<li>36 кв.м., 2 комнаты, ремонт</li>\n<li>двуспальная кровать 160*200см., диван</li>\n<li>санузел - душ, полотенца, халаты</li>\n<li>холодильник, ТV, чайник, фен, кондиционер</li>\n</ul>\n",
-                "maksymalna_kilkist_doroslyh": "2",
-                "najdeshevshyj_nomer": false,
-                "detalnyj_opys_nomeru_raw": "{\"blocks\":[{\"key\":\"fc1pc\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"evjre\",\"text\":\"36 кв.м., 2 комнаты, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"d9p77\",\"text\":\"двуспальная кровать 160*200см., диван\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"7j5lk\",\"text\":\"санузел - душ, полотенца, халаты\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"89c9k\",\"text\":\"холодильник, ТV, чайник, фен, кондиционер\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                "taryf": [
-                    {
-                        "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                        "nazva_taryfu": "Лечебная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": false,
-                        "period_prozhyvannya": [
-                            {
-                                "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
-                                    }
-                                ],
-                                "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "3300",
-                                    "2_adult": "4400"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1500"
-                                }
-                            },
-                            {
-                                "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
-                                    }
-                                ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "3800",
-                                    "2_adult": "5200"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                        "nazva_taryfu": "Оздоровительная путевка",
-                        "opys_taryfa": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
-                        "opys_taryfa_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-                        "najdeshevshyj_taryf": true,
-                        "period_prozhyvannya": [
-                            {
-                                "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                                "nazva_periodu": "Низький сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "20.01.2025",
-                                        "data_kintsya_periodu": "01.05.2025"
-                                    }
-                                ],
-                                "position": 0,
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "3000",
-                                    "2_adult": "3200"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "800"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1000"
-                                }
-                            },
-                            {
-                                "id": "03ba83e3-85ea-4a6a-ba29-455bbcd1f336",
-                                "nazva_periodu": "Высокий сезон",
-                                "on_of_period": "yes",
-                                "potochnyj_period": false,
-                                "daty_periodu": [
-                                    {
-                                        "data_pochatku_periodu": "01.05.2025",
-                                        "data_kintsya_periodu": "01.10.2025"
-                                    }
-                                ],
-                                "tsina_za_doroslyh": {
-                                    "1_adult": "-",
-                                    "2_adult": "3400"
-                                },
-                                "dodatkovi_mistsya": "",
-                                "dytyachyj_taryf": {
-                                    "nazva_vik_ditej": "Доп. место с 3-10 лет без. лечения",
-                                    "tsina_dytyachogo_taryfu": "900"
-                                },
-                                "dytyachyj_taryf_2": {
-                                    "nazva_vik_ditej": "Доп. место с 10 лет без лечения",
-                                    "tsina_dytyachogo_taryfu": "1100"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
+       
+
         ]
     }
-]
 ```
 
 ### WordPress Meta Field Structure

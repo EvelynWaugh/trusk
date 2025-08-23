@@ -162,17 +162,17 @@ export default function AdminTruskavetsk() {
     TRUSKA_DATA.korpus ? maybeAddIds(TRUSKA_DATA.korpus) : []
   );
   const [tarifData, setTarifData] = useState(
-    get(data, ["0", "room", "0", "taryf"], [])
+    get(data, ["0", "room", "0", "tariff"], [])
   );
   const [seasonData, setSeasonData] = useState(
-    get(data, ["0", "room", "0", "taryf", "0", "period_prozhyvannya"], [])
+    get(data, ["0", "room", "0", "tariff", "0", "booking_period"], [])
   );
   const [childData, setChildData] = useState(
     omitDeep(
       pickBy(
         get(
           data,
-          ["0", "room", "0", "taryf", "0", "period_prozhyvannya", "0"],
+          ["0", "room", "0", "tariff", "0", "booking_period", "0"],
           {}
         ),
         function (value, key) {
@@ -191,8 +191,8 @@ export default function AdminTruskavetsk() {
 			data.map((korpus) => {
 			  const roomPics = korpus.room.map((r) => {
 				const gallery =
-				  r.hasOwnProperty("galereya_nomera") && r.galereya_nomera
-					? r.galereya_nomera.map((g) => g.foto_nomera)
+				  r.hasOwnProperty("room_gallery") && r.room_gallery
+					? r.room_gallery.map((g) => g.foto_nomera)
 					: [];
 		
 				return [r.room_main_foto, ...gallery];
@@ -261,8 +261,8 @@ export default function AdminTruskavetsk() {
     console.log(newChildData);
     const newKorpusData = data.map((korpus) => {
       const newRoomData = korpus.room.map((room) => {
-        const taryfNew = room.taryf.map((taryf) => {
-          const seasonNew = taryf.period_prozhyvannya.map((s) => {
+        const taryfNew = room.tariff.map((tariff) => {
+          const seasonNew = tariff.booking_period.map((s) => {
             const allChilds = pickBy(s, function (value, key) {
               return startsWith(key, "price_for_child");
             });
@@ -283,11 +283,11 @@ export default function AdminTruskavetsk() {
 
             return {...s, ...newChildData};
           });
-          return {...taryf, period_prozhyvannya: seasonNew};
+          return {...tariff, booking_period: seasonNew};
         });
         return {
           ...room,
-          taryf: taryfNew,
+          tariff: taryfNew,
         };
       });
       return {...korpus, room: newRoomData};
@@ -307,8 +307,8 @@ export default function AdminTruskavetsk() {
 
     const newKorpusData = data.map((korpus) => {
       const newRoomData = korpus.room.map((room) => {
-        const taryfNew = room.taryf.map((taryf) => {
-          const seasonNew = taryf.period_prozhyvannya.map((s) => {
+        const taryfNew = room.tariff.map((tariff) => {
+          const seasonNew = tariff.booking_period.map((s) => {
             const editedChildId = Object.keys(editedChild);
             return {
               ...s,
@@ -319,11 +319,11 @@ export default function AdminTruskavetsk() {
               },
             };
           });
-          return {...taryf, period_prozhyvannya: seasonNew};
+          return {...tariff, booking_period: seasonNew};
         });
         return {
           ...room,
-          taryf: taryfNew,
+          tariff: taryfNew,
         };
       });
       return {...korpus, room: newRoomData};
@@ -353,19 +353,19 @@ export default function AdminTruskavetsk() {
     });
     const newKorpusData = data.map((korpus) => {
       const newRoomData = korpus.room.map((room) => {
-        const taryfNew = room.taryf.map((taryf) => {
-          const seasonNew = taryf.period_prozhyvannya.map((s) => {
+        const taryfNew = room.tariff.map((tariff) => {
+          const seasonNew = tariff.booking_period.map((s) => {
             return {
               ...s,
 
               ...childNew,
             };
           });
-          return {...taryf, period_prozhyvannya: seasonNew};
+          return {...tariff, booking_period: seasonNew};
         });
         return {
           ...room,
-          taryf: taryfNew,
+          tariff: taryfNew,
         };
       });
       return {...korpus, room: newRoomData};
@@ -375,18 +375,18 @@ export default function AdminTruskavetsk() {
     closeDialogChild();
   };
 
-  //taryf
+  //tariff
   const [dialogTaryf, setDialogTaryf] = useState(false);
   const [dialogTaryfSingle, setDialogTaryfSingle] = useState({});
   const [tarifNew, setTarifNew] = useState({
     id: uuid(),
-    nazva_taryfu: "",
-    opys_taryfa: "",
-    opys_taryfa_raw: JSON.stringify(
+    tariff_name: "",
+    tariff_description: "",
+    tariff_description_raw: JSON.stringify(
       convertToRaw(EditorState.createEmpty().getCurrentContent())
     ),
-    najdeshevshyj_taryf: false,
-    period_prozhyvannya: [],
+    lovest_price_tariff: false,
+    booking_period: [],
   });
   const [editedTaryf, setEditedTaryf] = useState(null);
 
@@ -400,29 +400,29 @@ export default function AdminTruskavetsk() {
     setDialogTaryfSingle({...dialogTaryfSingle, [id]: true});
     let foundTarif = tarifData.find((tarif) => tarif.id === id);
     if (
-      foundTarif.opys_taryfa &&
-      foundTarif.opys_taryfa !== "" &&
-      foundTarif.opys_taryfa !== undefined
+      foundTarif.tariff_description &&
+      foundTarif.tariff_description !== "" &&
+      foundTarif.tariff_description !== undefined
     ) {
-      const contentHTML = convertFromHTML(foundTarif.opys_taryfa);
+      const contentHTML = convertFromHTML(foundTarif.tariff_description);
       const state = ContentState.createFromBlockArray(
         contentHTML.contentBlocks,
         contentHTML.entityMap
       );
       foundTarif = {
         ...foundTarif,
-        opys_taryfa: JSON.stringify(convertToRaw(state)),
-        opys_taryfa_raw: JSON.stringify(convertToRaw(state)),
+        tariff_description: JSON.stringify(convertToRaw(state)),
+        tariff_description_raw: JSON.stringify(convertToRaw(state)),
       };
     } else {
       const editorState = EditorState.createEmpty();
       foundTarif = {
         ...foundTarif,
 
-        opys_taryfa: JSON.stringify(
+        tariff_description: JSON.stringify(
           convertToRaw(editorState.getCurrentContent())
         ),
-        opys_taryfa_raw: JSON.stringify(
+        tariff_description_raw: JSON.stringify(
           convertToRaw(editorState.getCurrentContent())
         ),
       };
@@ -455,29 +455,29 @@ export default function AdminTruskavetsk() {
     const foundKorpus = data.find((korpus) => korpus.id === id);
     const chnagedRoomds = foundKorpus.room.map((room) => {
       if (
-        room.detalnyj_opys_nomeru &&
-        room.detalnyj_opys_nomeru !== "" &&
-        room.detalnyj_opys_nomeru !== "undefined"
+        room.room_info &&
+        room.room_info !== "" &&
+        room.room_info !== "undefined"
       ) {
-        const contentHTML = convertFromHTML(room.detalnyj_opys_nomeru);
+        const contentHTML = convertFromHTML(room.room_info);
         const state = ContentState.createFromBlockArray(
           contentHTML.contentBlocks,
           contentHTML.entityMap
         );
         return {
           ...room,
-          detalnyj_opys_nomeru: JSON.stringify(convertToRaw(state)),
-          detalnyj_opys_nomeru_raw: JSON.stringify(convertToRaw(state)),
+          room_info: JSON.stringify(convertToRaw(state)),
+          room_info_raw: JSON.stringify(convertToRaw(state)),
         };
       } else {
         const editorState = EditorState.createEmpty();
         return {
           ...room,
 
-          detalnyj_opys_nomeru: JSON.stringify(
+          room_info: JSON.stringify(
             convertToRaw(editorState.getCurrentContent())
           ),
-          detalnyj_opys_nomeru_raw: JSON.stringify(
+          room_info_raw: JSON.stringify(
             convertToRaw(editorState.getCurrentContent())
           ),
         };
@@ -520,13 +520,13 @@ export default function AdminTruskavetsk() {
   const [dialogSeasonSingle, setDialogSeasonSingle] = useState(false);
   const [seasonNew, setSeasonNew] = useState({
     id: uuid(),
-    nazva_periodu: "",
+    booking_period_name: "",
     on_of_period: "yes",
-    potochnyj_period: false,
-    daty_periodu: [
+    current_period: false,
+    booking_period_dates: [
       {
-        data_pochatku_periodu: new Date(),
-        data_kintsya_periodu: new Date(),
+        booking_period_begin: new Date(),
+        booking_period_end: new Date(),
       },
     ],
   });
@@ -571,10 +571,10 @@ export default function AdminTruskavetsk() {
   //     ...tarifData,
   //     {
   //       id: uuid(),
-  //       nazva_taryfu: "",
-  //       opys_taryfa: "",
-  //       period_prozhyvannya: [],
-  //       najdeshevshyj_taryf: false,
+  //       tariff_name: "",
+  //       tariff_description: "",
+  //       booking_period: [],
+  //       lovest_price_tariff: false,
   //     },
   //   ]);
   // };
@@ -584,7 +584,7 @@ export default function AdminTruskavetsk() {
   //TARIF SINGLE//
 
   const setTarifSingle = (e, id) => {
-    setEditedTaryf({...editedTaryf, nazva_taryfu: e.target.value});
+    setEditedTaryf({...editedTaryf, tariff_name: e.target.value});
   };
   // const setTarifSingle = (e, id) => {
   //   const filteredData = tarifData.map((el) => {
@@ -606,7 +606,7 @@ export default function AdminTruskavetsk() {
     //   room.room_id === room_id
     //     ? {
     //         ...room,
-    //         detalnyj_opys_nomeru_raw: JSON.stringify(
+    //         room_info_raw: JSON.stringify(
     //           convertToRaw(data.getCurrentContent())
     //         ),
     //       }
@@ -616,18 +616,18 @@ export default function AdminTruskavetsk() {
     // const markup = draftToHtml(JSON.parse(data));
     setEditedTaryf({
       ...editedTaryf,
-      opys_taryfa_raw: JSON.stringify(convertToRaw(data.getCurrentContent())),
+      tariff_description_raw: JSON.stringify(convertToRaw(data.getCurrentContent())),
     });
 
     // const filteredData = tarifData.map((el) => {
-    //   return el.id === id ? {...el, opys_taryfa: markup} : el;
+    //   return el.id === id ? {...el, tariff_description: markup} : el;
     // });
 
     // setTarifData(filteredData);
   };
   const handleLowestTarif = (e, id) => {
     console.log(id);
-    setEditedTaryf({...editedTaryf, najdeshevshyj_taryf: e.target.checked});
+    setEditedTaryf({...editedTaryf, lovest_price_tariff: e.target.checked});
   };
   const setTaryfOpus = (opus) => {
     if (opus && opus !== "" && opus !== "undefined") {
@@ -645,19 +645,19 @@ export default function AdminTruskavetsk() {
   const saveSingleTaryf = (id) => {
     const newKorpuses = data.map((korpus) => {
       const newRooms = korpus.room.map((room) => {
-        const taryfNew = room.taryf.map((taryf) => {
-          //   const newData = tarifData.find((t) => t.id === taryf.id);
-          if (taryf.id === id) {
+        const taryfNew = room.tariff.map((tariff) => {
+          //   const newData = tarifData.find((t) => t.id === tariff.id);
+          if (tariff.id === id) {
             return {
-              ...taryf,
-              opys_taryfa: draftToHtml(JSON.parse(editedTaryf.opys_taryfa_raw)),
-              nazva_taryfu: editedTaryf.nazva_taryfu,
-              najdeshevshyj_taryf: editedTaryf.najdeshevshyj_taryf,
+              ...tariff,
+              tariff_description: draftToHtml(JSON.parse(editedTaryf.tariff_description_raw)),
+              tariff_name: editedTaryf.tariff_name,
+              lovest_price_tariff: editedTaryf.lovest_price_tariff,
             };
           }
-          return taryf;
+          return tariff;
         });
-        return {...room, taryf: taryfNew};
+        return {...room, tariff: taryfNew};
       });
       return {...korpus, room: newRooms};
     });
@@ -667,7 +667,7 @@ export default function AdminTruskavetsk() {
 
     tarifData.splice(indexOfFound, 1, {
       ...editedTaryf,
-      opys_taryfa: draftToHtml(JSON.parse(editedTaryf.opys_taryfa_raw)),
+      tariff_description: draftToHtml(JSON.parse(editedTaryf.tariff_description_raw)),
     });
     setTarifData(tarifData);
     // setRoomsData(newRooms);
@@ -680,16 +680,16 @@ export default function AdminTruskavetsk() {
     if (!id) {
       return;
     }
-    setEditedSeason({...editedSeason, nazva_periodu: e.target.value});
+    setEditedSeason({...editedSeason, booking_period_name: e.target.value});
   };
   const addDateSeasonSingle = () => {
     setEditedSeason({
       ...editedSeason,
-      daty_periodu: [
-        ...editedSeason.daty_periodu,
+      booking_period_dates: [
+        ...editedSeason.booking_period_dates,
         {
-          data_pochatku_periodu: new Date(),
-          data_kintsya_periodu: new Date(),
+          booking_period_begin: new Date(),
+          booking_period_end: new Date(),
         },
       ],
     });
@@ -701,11 +701,11 @@ export default function AdminTruskavetsk() {
     if (when === "start_date") {
       setEditedSeason({
         ...editedSeason,
-        daty_periodu: editedSeason.daty_periodu.map((date_period, index) => {
+        booking_period_dates: editedSeason.booking_period_dates.map((date_period, index) => {
           if (i === index) {
             return {
               ...date_period,
-              data_pochatku_periodu: format(val, "dd.MM.yyyy"),
+              booking_period_begin: format(val, "dd.MM.yyyy"),
             };
           }
           return date_period;
@@ -715,11 +715,11 @@ export default function AdminTruskavetsk() {
     if (when === "end_date") {
       setEditedSeason({
         ...editedSeason,
-        daty_periodu: editedSeason.daty_periodu.map((date_period, index) => {
+        booking_period_dates: editedSeason.booking_period_dates.map((date_period, index) => {
           if (i === index) {
             return {
               ...date_period,
-              data_kintsya_periodu: format(val, "dd.MM.yyyy"),
+              booking_period_end: format(val, "dd.MM.yyyy"),
             };
           }
           return date_period;
@@ -730,7 +730,7 @@ export default function AdminTruskavetsk() {
   const deleteSeasonSingleDate = (index) => {
     setEditedSeason({
       ...editedSeason,
-      daty_periodu: editedSeason.daty_periodu.filter((date_period, i) => {
+      booking_period_dates: editedSeason.booking_period_dates.filter((date_period, i) => {
         return i !== index;
       }),
     });
@@ -746,27 +746,27 @@ export default function AdminTruskavetsk() {
     setSeasonData(seasonData);
     const newKorpuses = data.map((korpus) => {
       const newRooms = korpus.room.map((room) => {
-        const taryfNew = room.taryf.map((taryf) => {
-          const seasonNew = taryf.period_prozhyvannya.map((season) => {
+        const taryfNew = room.tariff.map((tariff) => {
+          const seasonNew = tariff.booking_period.map((season) => {
             const newData = seasonData.find((s) => s.id === season.id);
             return {
               ...season,
-              nazva_periodu: newData.nazva_periodu,
-              daty_periodu: newData.daty_periodu.map((date_period, i) => {
+              booking_period_name: newData.booking_period_name,
+              booking_period_dates: newData.booking_period_dates.map((date_period, i) => {
                 return {
-                  data_pochatku_periodu: date_period.data_pochatku_periodu,
-                  data_kintsya_periodu: date_period.data_kintsya_periodu,
+                  booking_period_begin: date_period.booking_period_begin,
+                  booking_period_end: date_period.booking_period_end,
                 };
               }),
             };
           });
 
           return {
-            ...taryf,
-            period_prozhyvannya: seasonNew,
+            ...tariff,
+            booking_period: seasonNew,
           };
         });
-        return {...room, taryf: taryfNew};
+        return {...room, tariff: taryfNew};
       });
       return {...korpus, room: newRooms};
     });
@@ -778,17 +778,17 @@ export default function AdminTruskavetsk() {
     // initRoomsData(newRooms);
     setDialogSeasonSingle(false);
   };
-  //Taryf new
+  //tariff new
 
   const saveTarifNewField = (e) => {
-    setTarifNew({...tarifNew, nazva_taryfu: e.target.value});
+    setTarifNew({...tarifNew, tariff_name: e.target.value});
   };
   const saveTextEditorNew = (data) => {
     // const markup = draftToHtml(JSON.parse(data));
 
     setTarifNew({
       ...tarifNew,
-      opys_taryfa_raw: JSON.stringify(convertToRaw(data.getCurrentContent())),
+      tariff_description_raw: JSON.stringify(convertToRaw(data.getCurrentContent())),
     });
   };
   const saveNewTaryf = () => {
@@ -796,7 +796,7 @@ export default function AdminTruskavetsk() {
 
     const newKorpusData = data.map((korpus) => {
       const newRoomData = korpus.room.map((room) => {
-        let maxAdult = room.maksymalna_kilkist_doroslyh;
+        let maxAdult = room.adults_number;
         const newSeasonsData = seasonData.map((s) => {
           return {
             ...s,
@@ -813,12 +813,12 @@ export default function AdminTruskavetsk() {
         });
         return {
           ...room,
-          taryf: [
-            ...room.taryf,
+          tariff: [
+            ...room.tariff,
             {
               ...tarifNew,
-              opys_taryfa: draftToHtml(JSON.parse(tarifNew.opys_taryfa_raw)),
-              period_prozhyvannya: newSeasonsData,
+              tariff_description: draftToHtml(JSON.parse(tarifNew.tariff_description_raw)),
+              booking_period: newSeasonsData,
             },
           ],
         };
@@ -830,18 +830,18 @@ export default function AdminTruskavetsk() {
       ...tarifData,
       {
         ...tarifNew,
-        opys_taryfa: draftToHtml(JSON.parse(tarifNew.opys_taryfa_raw)),
+        tariff_description: draftToHtml(JSON.parse(tarifNew.tariff_description_raw)),
       },
     ]);
     setTarifNew({
       id: uuid(),
-      nazva_taryfu: "",
-      opys_taryfa: "",
-      opys_taryfa_raw: JSON.stringify(
+      tariff_name: "",
+      tariff_description: "",
+      tariff_description_raw: JSON.stringify(
         convertToRaw(editorState.getCurrentContent())
       ),
-      najdeshevshyj_taryf: false,
-      period_prozhyvannya: [],
+      lovest_price_tariff: false,
+      booking_period: [],
     });
     setDialogTaryf(false);
   };
@@ -852,7 +852,7 @@ export default function AdminTruskavetsk() {
   //   }, [tarifData]);
   //New Season
   const saveSeasonNewField = (e) => {
-    setSeasonNew({...seasonNew, nazva_periodu: e.target.value});
+    setSeasonNew({...seasonNew, booking_period_name: e.target.value});
   };
   const setDatesNewSeason = (i, newValue, when) => {
     console.log(newValue);
@@ -862,11 +862,11 @@ export default function AdminTruskavetsk() {
     if (when === "start_date") {
       setSeasonNew({
         ...seasonNew,
-        daty_periodu: seasonNew.daty_periodu.map((date_period, index) => {
+        booking_period_dates: seasonNew.booking_period_dates.map((date_period, index) => {
           if (i === index) {
             return {
               ...date_period,
-              data_pochatku_periodu: format(newValue, "dd.MM.yyyy"),
+              booking_period_begin: format(newValue, "dd.MM.yyyy"),
             };
           }
           return date_period;
@@ -876,11 +876,11 @@ export default function AdminTruskavetsk() {
     if (when === "end_date") {
       setSeasonNew({
         ...seasonNew,
-        daty_periodu: seasonNew.daty_periodu.map((date_period, index) => {
+        booking_period_dates: seasonNew.booking_period_dates.map((date_period, index) => {
           if (i === index) {
             return {
               ...date_period,
-              data_kintsya_periodu: format(newValue, "dd.MM.yyyy"),
+              booking_period_end: format(newValue, "dd.MM.yyyy"),
             };
           }
           return date_period;
@@ -891,11 +891,11 @@ export default function AdminTruskavetsk() {
   const addDateSeason = () => {
     setSeasonNew({
       ...seasonNew,
-      daty_periodu: [
-        ...seasonNew.daty_periodu,
+      booking_period_dates: [
+        ...seasonNew.booking_period_dates,
         {
-          data_pochatku_periodu: new Date(),
-          data_kintsya_periodu: new Date(),
+          booking_period_begin: new Date(),
+          booking_period_end: new Date(),
         },
       ],
     });
@@ -904,12 +904,12 @@ export default function AdminTruskavetsk() {
     console.log(seasonNew);
     const newKorpusData = data.map((korpus) => {
       const newRoomData = korpus.room.map((room) => {
-        let maxAdult = room.maksymalna_kilkist_doroslyh;
-        const newTaryfData = room.taryf.map((taryf) => {
+        let maxAdult = room.adults_number;
+        const newTaryfData = room.tariff.map((tariff) => {
           return {
-            ...taryf,
-            period_prozhyvannya: [
-              ...taryf.period_prozhyvannya,
+            ...tariff,
+            booking_period: [
+              ...tariff.booking_period,
               {
                 ...seasonNew,
                 tsina_za_doroslyh: Array.from(
@@ -928,7 +928,7 @@ export default function AdminTruskavetsk() {
 
         return {
           ...room,
-          taryf: newTaryfData,
+          tariff: newTaryfData,
         };
       });
       return {...korpus, room: newRoomData};
@@ -937,13 +937,13 @@ export default function AdminTruskavetsk() {
     setSeasonData([...seasonData, {...seasonNew, position: seasonData.length}]);
     setSeasonNew({
       id: uuid(),
-      nazva_periodu: "",
+      booking_period_name: "",
       on_of_period: "yes",
-      potochnyj_period: false,
-      daty_periodu: [
+      current_period: false,
+      booking_period_dates: [
         {
-          data_pochatku_periodu: new Date(),
-          data_kintsya_periodu: new Date(),
+          booking_period_begin: new Date(),
+          booking_period_end: new Date(),
         },
       ],
     });
@@ -959,13 +959,13 @@ export default function AdminTruskavetsk() {
       setSeasonData(newSeasonData);
       const newKorpuses = data.map((korpus) => {
         const modifiedData = korpus.room.map((r) => {
-          const taryfArr = r.taryf.map((t) => {
-            const filteredSeason = t.period_prozhyvannya.filter(
+          const taryfArr = r.tariff.map((t) => {
+            const filteredSeason = t.booking_period.filter(
               (s) => s.id !== id
             );
-            return {...t, period_prozhyvannya: filteredSeason};
+            return {...t, booking_period: filteredSeason};
           });
-          return {...r, taryf: taryfArr};
+          return {...r, tariff: taryfArr};
         });
         return {...korpus, room: modifiedData};
       });
@@ -982,11 +982,11 @@ export default function AdminTruskavetsk() {
       setTarifData(newTaryfData);
       const newKorpuses = data.map((korpus) => {
         const modifiedData = korpus.room.map((r) => {
-          const filteredTaryf = r.taryf.filter((t) => {
+          const filteredTaryf = r.tariff.filter((t) => {
             return t.id !== id;
           });
 
-          return {...r, taryf: filteredTaryf};
+          return {...r, tariff: filteredTaryf};
         });
         return {...korpus, room: modifiedData};
       });
@@ -1217,8 +1217,8 @@ export default function AdminTruskavetsk() {
                     disabled
                     type="text"
                     label="Назва"
-                    name="nazva_taryfu"
-                    value={tarif.nazva_taryfu}
+                    name="tariff_name"
+                    value={tarif.tariff_name}
                   />
                 </FormControl>
 
@@ -1253,8 +1253,8 @@ export default function AdminTruskavetsk() {
                         <TextField
                           type="text"
                           label="Назва"
-                          name="nazva_taryfu_new"
-                          value={editedTaryf?.nazva_taryfu}
+                          name="tariff_name_new"
+                          value={editedTaryf?.tariff_name}
                           onChange={(e) => setTarifSingle(e, tarif.id)}
                         />
                       </FormControl>
@@ -1264,7 +1264,7 @@ export default function AdminTruskavetsk() {
                             label="Опис тарифу"
                             onChange={(data) => saveTextEditor(data, tarif.id)}
                             // onSave={(data) => saveTextEditor(data, tarif.id)}
-                            defaultValue={editedTaryf?.opys_taryfa}
+                            defaultValue={editedTaryf?.tariff_description}
                           />
                         </ThemeProvider>
                       </TaryfFormControl>
@@ -1274,7 +1274,7 @@ export default function AdminTruskavetsk() {
                           label="Найдешевший тариф"
                           control={
                             <Checkbox
-                              checked={editedTaryf?.najdeshevshyj_taryf}
+                              checked={editedTaryf?.lovest_price_tariff}
                               onChange={(e) => handleLowestTarif(e, tarif.id)}
                             />
                           }
@@ -1309,8 +1309,8 @@ export default function AdminTruskavetsk() {
                     <TextField
                       type="text"
                       label="Назва"
-                      name="nazva_taryfu_new"
-                      value={tarifNew.nazva_taryfu}
+                      name="tariff_name_new"
+                      value={tarifNew.tariff_name}
                       onChange={saveTarifNewField}
                     />
                   </FormControl>
@@ -1448,23 +1448,23 @@ export default function AdminTruskavetsk() {
           <FormWrapper key={`korpus-${sindex}`}>
             <BoxTypo>
               <Typography variant="h6" component="h6">
-                {season.nazva_periodu}
+                {season.booking_period_name}
               </Typography>
             </BoxTypo>
-            {season.daty_periodu.map((date_period, i) => (
+            {season.booking_period_dates.map((date_period, i) => (
               <>
                 <FormControl>
                   <TextField
                     disabled
                     label="Початок сезону"
-                    value={date_period.data_pochatku_periodu}
+                    value={date_period.booking_period_begin}
                   />
                 </FormControl>
                 <FormControl>
                   <TextField
                     disabled
                     label="Кінець сезону"
-                    value={date_period.data_kintsya_periodu}
+                    value={date_period.booking_period_end}
                   />
                 </FormControl>
               </>
@@ -1499,12 +1499,12 @@ export default function AdminTruskavetsk() {
                 <TextField
                   type="text"
                   label="Назва"
-                  name="nazva_periodu_new"
-                  value={editedSeason?.nazva_periodu}
+                  name="booking_period_name_new"
+                  value={editedSeason?.booking_period_name}
                   onChange={(e) => setSeasonSingle(e, editedSeason?.id)}
                 />
               </FormControl>
-              {editedSeason?.daty_periodu.map((date_period, i) => (
+              {editedSeason?.booking_period_dates.map((date_period, i) => (
                 <div key={`korpus-${i}`}>
                   <FormControl className="trusk_date">
                     <LocalizationProvider
@@ -1518,7 +1518,7 @@ export default function AdminTruskavetsk() {
                         value={
                           editedSeason
                             ? parse(
-                                date_period.data_pochatku_periodu,
+                                date_period.booking_period_begin,
                                 "dd.MM.yyyy",
                                 new Date()
                               )
@@ -1544,7 +1544,7 @@ export default function AdminTruskavetsk() {
                         value={
                           editedSeason
                             ? parse(
-                                date_period.data_kintsya_periodu,
+                                date_period.booking_period_end,
                                 "dd.MM.yyyy",
                                 new Date()
                               )
@@ -1599,11 +1599,11 @@ export default function AdminTruskavetsk() {
                   type="text"
                   label="Назва"
                   name="nazva_season_new"
-                  value={seasonNew.nazva_periodu}
+                  value={seasonNew.booking_period_name}
                   onChange={saveSeasonNewField}
                 />
               </FormControl>
-              {seasonNew.daty_periodu.map((date_period, i) => (
+              {seasonNew.booking_period_dates.map((date_period, i) => (
                 <div key={`korpus-${i}`}>
                   <FormControl className="trusk_date">
                     <LocalizationProvider
@@ -1615,7 +1615,7 @@ export default function AdminTruskavetsk() {
                         // inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
                         value={parse(
-                          seasonNew.daty_periodu[i].data_pochatku_periodu,
+                          seasonNew.booking_period_dates[i].booking_period_begin,
                           "dd.MM.yyyy",
                           new Date()
                         )}
@@ -1637,7 +1637,7 @@ export default function AdminTruskavetsk() {
                         // inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
                         value={parse(
-                          seasonNew.daty_periodu[i].data_kintsya_periodu,
+                          seasonNew.booking_period_dates[i].booking_period_end,
                           "dd.MM.yyyy",
                           new Date()
                         )}

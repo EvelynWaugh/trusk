@@ -23,16 +23,16 @@ const RoomsInnerRows = styled.div`
   align-items: center;
 `;
 export default function RoomsPanel({data, setData, seasonData, tarifData}) {
-  const handlechangeRoom = (e, korpus_id, room_id, taryf, season) => {
+  const handlechangeRoom = (e, korpus_id, room_id, tariff, season) => {
     const korpusDataChanged = data.map((korpus) => {
       const roomsdataChanged = korpus.room.map((room) => {
         if (room.room_id === room_id) {
           console.log(room_id);
-          const taryfModified = room.taryf.map((t) => {
-            if (t.nazva_taryfu === taryf) {
-              console.log(taryf);
-              const seasonModified = t.period_prozhyvannya.map((s) => {
-                if (s.nazva_periodu === season) {
+          const taryfModified = room.tariff.map((t) => {
+            if (t.tariff_name === tariff) {
+              console.log(tariff);
+              const seasonModified = t.booking_period.map((s) => {
+                if (s.booking_period_name === season) {
                   console.log(season);
                   return {
                     ...s,
@@ -44,11 +44,11 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
                 }
                 return s;
               });
-              return {...t, period_prozhyvannya: seasonModified};
+              return {...t, booking_period: seasonModified};
             }
             return t;
           });
-          return {...room, taryf: taryfModified};
+          return {...room, tariff: taryfModified};
         }
         return room;
       });
@@ -61,14 +61,14 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
     setData(korpusDataChanged);
   };
 
-  const handleChangeChild = (e, korpus_id, room_id, taryf, season, dt) => {
+  const handleChangeChild = (e, korpus_id, room_id, tariff, season, dt) => {
     const korpusDataChanged = data.map((korpus) => {
       const roomsdataChanged = korpus.room.map((room) => {
         if (room.room_id === room_id) {
-          const taryfModified = room.taryf.map((t) => {
-            if (t.nazva_taryfu === taryf) {
-              const seasonModified = t.period_prozhyvannya.map((s) => {
-                if (s.nazva_periodu === season) {
+          const taryfModified = room.tariff.map((t) => {
+            if (t.tariff_name === tariff) {
+              const seasonModified = t.booking_period.map((s) => {
+                if (s.booking_period_name === season) {
                   return {
                     ...s,
                     [dt]: {
@@ -79,11 +79,11 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
                 }
                 return s;
               });
-              return {...t, period_prozhyvannya: seasonModified};
+              return {...t, booking_period: seasonModified};
             }
             return t;
           });
-          return {...room, taryf: taryfModified};
+          return {...room, tariff: taryfModified};
         }
         return room;
       });
@@ -109,23 +109,23 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
                 rows={seasonData.length + 1}
               >
                 <Typography variant="h5" component="h5">
-                  {sRoom.nazva_nomeru}
+                  {sRoom.room_name}
                 </Typography>
                 {seasonData.map((season, si) => (
                   <div key={`season-${si}`}>
                     <Typography variant="body1" component="span">
-                      {season.nazva_periodu}
+                      {season.booking_period_name}
                     </Typography>
-                    {season.daty_periodu.map((date_period, i) => (
-                      <div key={`dates-${i}`}>{`${date_period.data_pochatku_periodu}-${date_period.data_kintsya_periodu}`}</div>
+                    {season.booking_period_dates.map((date_period, i) => (
+                      <div key={`dates-${i}`}>{`${date_period.booking_period_begin}-${date_period.booking_period_end}`}</div>
                     ))}
                   </div>
                 ))}
               </RoomRowTable>
-              {sRoom.taryf.map((tarif, indexT) => (
-                <RoomRowTable rows={seasonData.length + 1} key={`taryf-${indexT}`}>
-                  <div>{tarif.nazva_taryfu}</div>
-                  {tarif.period_prozhyvannya
+              {sRoom.tariff.map((tarif, indexT) => (
+                <RoomRowTable rows={seasonData.length + 1} key={`tariff-${indexT}`}>
+                  <div>{tarif.tariff_name}</div>
+                  {tarif.booking_period
                     .sort((a, b) => {
                       return a.position - b.position;
                     })
@@ -138,7 +138,7 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
                           <Typography>Вартість, грн</Typography>
                         </RoomsInnerRows>
                         {Array.from({
-                          length: sRoom.maksymalna_kilkist_doroslyh,
+                          length: sRoom.adults_number,
                         }).map((maxAdult, i) => {
                           return (
                             <RoomsInnerRows key={`adult-${i}`}>
@@ -152,8 +152,8 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
                                       e,
                                       korpus.id,
                                       sRoom.room_id,
-                                      tarif.nazva_taryfu,
-                                      season.nazva_periodu
+                                      tarif.tariff_name,
+                                      season.booking_period_name
                                     )
                                   }
                                   value={
@@ -167,13 +167,13 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
 
                         {Object.keys(
                           pickBy(season, function (value, key) {
-                            return startsWith(key, "dytyachyj_taryf");
+                            return startsWith(key, "price_for_child");
                           })
                         ).map((dt, i) => (
-                          <RoomsInnerRows key={`dytyc-${i}`}>
+                          <RoomsInnerRows key={`child-${i}`}>
                             <div>
                               <Typography variant="body2" component="span">
-                                {season[dt].nazva_vik_ditej}
+                                {season[dt].kids_tarriff_name}
                               </Typography>
                             </div>
                             <FormControl>
@@ -185,8 +185,8 @@ export default function RoomsPanel({data, setData, seasonData, tarifData}) {
                                     e,
                                     korpus.id,
                                     sRoom.room_id,
-                                    tarif.nazva_taryfu,
-                                    season.nazva_periodu,
+                                    tarif.tariff_name,
+                                    season.booking_period_name,
                                     dt
                                   )
                                 }
