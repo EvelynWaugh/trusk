@@ -9,6 +9,9 @@ import {
   Toolbar,
   Typography,
   Button,
+  Alert,
+  Snackbar,
+  CircularProgress,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { v4 as uuid } from 'uuid';
@@ -47,6 +50,22 @@ const React = TruskReact;
 const { useState, useCallback, useEffect } = TruskReact;
 
 export const AdminTruskavetsk: React.FC = () => {
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
+
+  // Auto-clear message after 5 seconds
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
   const {
     data,
     setData,
@@ -146,11 +165,18 @@ export const AdminTruskavetsk: React.FC = () => {
   };
 
   const saveData = async () => {
+    setSaving(true);
+    setMessage(null);
+
     try {
       // Get configuration from WordPress
       const config = window.hotelMetaboxConfig;
       if (!config) {
         console.error('Hotel metabox configuration not found');
+        setMessage({
+          type: 'error',
+          text: 'Конфігурація не знайдена',
+        });
         return;
       }
 
@@ -178,6 +204,10 @@ export const AdminTruskavetsk: React.FC = () => {
 
       if (!postId) {
         console.error('Post ID not found');
+        setMessage({
+          type: 'error',
+          text: 'ID поста не знайдено',
+        });
         return;
       }
 
@@ -198,16 +228,30 @@ export const AdminTruskavetsk: React.FC = () => {
 
       if (result.success) {
         console.log('Data saved successfully:', result.data);
-        // You could add a success notification here
+        setMessage({
+          type: 'success',
+          text: 'Дані успішно збережено!',
+        });
       } else {
         console.error(
           'Failed to save data:',
           result.data?.message || 'Unknown error'
         );
-        // You could add an error notification here
+        setMessage({
+          type: 'error',
+          text: `Помилка збереження: ${
+            result.data?.message || 'Невідома помилка'
+          }`,
+        });
       }
     } catch (error) {
       console.error('Error saving data:', error);
+      setMessage({
+        type: 'error',
+        text: 'Помилка мережі при збереженні даних',
+      });
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -217,12 +261,40 @@ export const AdminTruskavetsk: React.FC = () => {
         <Paper elevation={3}>
           <AppBar position="static" color="default">
             <Toolbar>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Управление отелем
-              </Typography>
-              <Button variant="contained" color="primary" onClick={saveData}>
-                Сохранить
-              </Button>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1 }}
+              ></Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                {message && (
+                  <Alert
+                    severity={message.type}
+                    onClose={() => setMessage(null)}
+                    sx={{
+                      minWidth: '200px',
+                      '& .MuiAlert-message': {
+                        fontSize: '0.875rem',
+                      },
+                    }}
+                  >
+                    {message.text}
+                  </Alert>
+                )}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={saveData}
+                  disabled={saving}
+                  startIcon={
+                    saving ? (
+                      <CircularProgress size={20} color="inherit" />
+                    ) : null
+                  }
+                >
+                  {saving ? 'Зберігаємо...' : 'Зберегти зміни'}
+                </Button>
+              </Box>
             </Toolbar>
           </AppBar>
 
@@ -233,10 +305,10 @@ export const AdminTruskavetsk: React.FC = () => {
               aria-label="hotel tabs"
               variant="fullWidth"
             >
-              <Tab label="Номера" {...tabProps(0)} />
-              <Tab label="Тарифы" {...tabProps(1)} />
-              <Tab label="Сезоны" {...tabProps(2)} />
-              <Tab label="Панель цен" {...tabProps(3)} />
+              <Tab label="Корпуси / Номери" {...tabProps(0)} />
+              <Tab label="Тарифи" {...tabProps(1)} />
+              <Tab label="Сезони" {...tabProps(2)} />
+              <Tab label="Ціни" {...tabProps(3)} />
             </Tabs>
           </Box>
 
@@ -254,15 +326,7 @@ export const AdminTruskavetsk: React.FC = () => {
 
           <TabPanel value={tab} index={3}>
             <div>
-              <Typography variant="h4" gutterBottom>
-                Панель управления ценами
-              </Typography>
-
-              <RoomsPanel
-                data={data}
-                seasonData={seasonData}
-                tarifData={tarifData}
-              />
+              <RoomsPanel />
             </div>
           </TabPanel>
         </Paper>

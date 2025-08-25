@@ -36,7 +36,8 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 const editorContainerStyle = `
   .rdw-editor-main { 
     overflow-y: auto !important; 
-    max-height: 200px !important; 
+    max-height: 150px !important; 
+	height: 150px !important;
   }
   .rdw-editor-toolbar { 
     margin-bottom: 0 !important; 
@@ -149,11 +150,6 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
     return <div></div>;
   }
 
-  console.log(
-    'Current section rooms:',
-    currentSection.rooms.map(r => r.room_name)
-  );
-
   const updateSection = (updatedSection: Section) => {
     console.log(
       'Updating section:',
@@ -193,9 +189,6 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
       },
     ],
     room_info: '',
-    room_info_raw: JSON.stringify(
-      convertToRaw(EditorState.createEmpty().getCurrentContent())
-    ),
     adults_number: '2',
     lovest_price_room: false,
     tariff: [],
@@ -436,9 +429,6 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
       if (editorState) {
         return {
           ...room,
-          room_info_raw: JSON.stringify(
-            convertToRaw(editorState.getCurrentContent())
-          ),
           room_info: stateToHTML(editorState.getCurrentContent()),
         };
       }
@@ -722,14 +712,14 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
                     <div style={{ marginBottom: '10px' }}>
                       <FormControl sx={{ marginRight: '10px' }}>
                         <TextField
-                          label="Название номера"
+                          label="Назва номеру"
                           value={room.room_name}
                           onChange={e => setRoomName(e, room.room_id)}
                         />
                       </FormControl>
                       <FormControl>
                         <TextField
-                          label="ID номера*"
+                          label="ID номеру*"
                           value={room.room_id}
                           onChange={e => setRoomID(e, room.room_id)}
                         />
@@ -738,7 +728,7 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
 
                     <div>
                       <Typography variant="h5" component="h5">
-                        Главное изображение
+                        Головна картинка
                       </Typography>
                       <UploadContainer
                         isUpload
@@ -772,7 +762,7 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
 
                     <div>
                       <Typography variant="h5" component="h5">
-                        Галерея номера
+                        Галерея номеру
                       </Typography>
                       <UploadContainer
                         isUpload
@@ -844,7 +834,7 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
                         variant="contained"
                         onClick={() => addCharacteristic(room.room_id)}
                       >
-                        Добавить характеристику
+                        Додати характеристику
                       </Button>
                     </div>
 
@@ -856,7 +846,7 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
                       }}
                     >
                       <Typography variant="h5" component="h5">
-                        Описание номера
+                        Опис номеру
                       </Typography>
                       <div
                         style={{
@@ -912,7 +902,7 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
                       color="secondary"
                       onClick={() => removeRoom(room.room_id)}
                     >
-                      Удалить номер
+                      Видалити номер
                     </Button>
                   </AccordionActions>
                 </Accordion>
@@ -940,11 +930,11 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
           onClose={() => setDialogGallery(false)}
           sx={{ zIndex: 121999 }}
         >
-          <DialogTitle>Подпись к фото</DialogTitle>
+          <DialogTitle>Підпис до фото</DialogTitle>
           <DialogContent>
             <div style={{ marginBottom: '10px' }}>
               <TextField
-                label="Название"
+                label="Назва"
                 value={editedGallery?.alt_image || ''}
                 onChange={updateGalleryText}
               />
@@ -954,7 +944,7 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
               color="primary"
               onClick={saveGalleryText}
             >
-              Сохранить
+              Зберегти
             </Button>
           </DialogContent>
         </Dialog>

@@ -81,7 +81,6 @@ const initialTariff: Tariff = {
   id: '',
   tariff_name: '',
   tariff_description: '',
-  tariff_description_raw: '',
   lovest_price_tariff: false,
   booking_period: [],
 };
@@ -113,10 +112,7 @@ const data = TRUSKA_DATA?.section || TRUSKA_DATA?.acf || [];
 //   price_for_child_2: { kids_tarriff_name: '6-11' },
 // };
 
-const childData = TRUSKA_DATA?.child || {
-  price_for_child: { kids_tarriff_name: '0-5' },
-  price_for_child_2: { kids_tarriff_name: '6-11' },
-};
+const childData = TRUSKA_DATA?.child || [];
 
 export const useHotelStore = create<HotelState>()(
   devtools(

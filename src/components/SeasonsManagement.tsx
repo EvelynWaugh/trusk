@@ -89,7 +89,13 @@ export const SeasonsManagement: React.FC = () => {
                 {} as Record<string, string>
               ),
               dodatkove_mistse: '',
-              ...childData,
+              price_for_child: childData
+                ? Object.keys(childData).map(key => ({
+                    kids_tarriff_name:
+                      (childData as any)[key].kids_tarriff_name || '',
+                    kids_tarriff_price: '',
+                  }))
+                : [],
             },
           ],
         }));
@@ -281,10 +287,6 @@ export const SeasonsManagement: React.FC = () => {
 
   return (
     <div>
-      <Typography variant="h4" gutterBottom>
-        Управление сезонами
-      </Typography>
-
       {seasonData?.map((season, index) => (
         <FormWrapper key={`season-${index}`}>
           <BoxTypo>
@@ -298,14 +300,14 @@ export const SeasonsManagement: React.FC = () => {
               <FormControl>
                 <TextField
                   disabled
-                  label="Начало сезона"
+                  label="Початок сезону"
                   value={datePeriod.booking_period_begin}
                 />
               </FormControl>
               <FormControl>
                 <TextField
                   disabled
-                  label="Конец сезона"
+                  label="Кінець сезону"
                   value={datePeriod.booking_period_end}
                 />
               </FormControl>
@@ -342,7 +344,7 @@ export const SeasonsManagement: React.FC = () => {
           <FormWrapperVertical>
             <FormControl>
               <TextField
-                label="Название сезона"
+                label="Назва сезону"
                 value={seasonNew.booking_period_name}
                 onChange={e =>
                   setSeasonNew({
@@ -361,7 +363,7 @@ export const SeasonsManagement: React.FC = () => {
                     adapterLocale={ru}
                   >
                     <DatePicker
-                      label="Начало сезона"
+                      label="Початок сезону"
                       value={parse(
                         datePeriod.booking_period_begin,
                         'dd.MM.yyyy',
@@ -381,7 +383,7 @@ export const SeasonsManagement: React.FC = () => {
                     adapterLocale={ru}
                   >
                     <DatePicker
-                      label="Конец сезона"
+                      label="Кінець сезону"
                       value={parse(
                         datePeriod.booking_period_end,
                         'dd.MM.yyyy',
@@ -406,7 +408,7 @@ export const SeasonsManagement: React.FC = () => {
             </IconButtonAddDate>
 
             <Button color="primary" variant="contained" onClick={saveNewSeason}>
-              Сохранить
+              Зберегти
             </Button>
           </FormWrapperVertical>
         </DialogContent>
@@ -425,7 +427,7 @@ export const SeasonsManagement: React.FC = () => {
               <FormWrapperVertical>
                 <FormControl>
                   <TextField
-                    label="Название сезона"
+                    label="Назв сезону"
                     value={editedSeason.booking_period_name}
                     onChange={e =>
                       setEditedSeason({
@@ -444,7 +446,7 @@ export const SeasonsManagement: React.FC = () => {
                         adapterLocale={ru}
                       >
                         <DatePicker
-                          label="Начало сезона"
+                          label="Початок сезону"
                           value={parse(
                             datePeriod.booking_period_begin,
                             'dd.MM.yyyy',
@@ -464,7 +466,7 @@ export const SeasonsManagement: React.FC = () => {
                         adapterLocale={ru}
                       >
                         <DatePicker
-                          label="Конец сезона"
+                          label="Кінець сезону"
                           value={parse(
                             datePeriod.booking_period_end,
                             'dd.MM.yyyy',
@@ -500,7 +502,7 @@ export const SeasonsManagement: React.FC = () => {
                   variant="contained"
                   onClick={() => saveSingleSeason(editedSeason.id)}
                 >
-                  Сохранить
+                  Зберегти
                 </Button>
               </FormWrapperVertical>
             )}

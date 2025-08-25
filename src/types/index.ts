@@ -24,7 +24,6 @@ export interface Tariff {
   id: string;
   tariff_name: string;
   tariff_description: string;
-  tariff_description_raw: string;
   lovest_price_tariff: boolean;
   booking_period: BookingPeriod[];
 }
@@ -45,7 +44,6 @@ export interface Room {
   room_gallery: GalleryImage[];
   key_features: KeyFeature[];
   room_info: string;
-  room_info_raw: string;
   adults_number: string;
   lovest_price_room: boolean;
   tariff: Tariff[];

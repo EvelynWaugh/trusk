@@ -169,7 +169,7 @@ export const SectionsManagement: React.FC = () => {
             <TextField
               disabled
               type="text"
-              label="Название секции"
+              label="Назва секції"
               name="section_name"
               value={section.section_name}
             />
@@ -178,7 +178,7 @@ export const SectionsManagement: React.FC = () => {
             <TextField
               disabled
               type="text"
-              label="Заголовок секции"
+              label="Заголовок для секції"
               name="section_title"
               value={section.section_title || ''}
             />
@@ -242,7 +242,7 @@ export const SectionsManagement: React.FC = () => {
               <FormControl>
                 <TextField
                   type="text"
-                  label="Название секции"
+                  label="Назва секції"
                   name="section_name"
                   value={
                     editingSectionId
@@ -256,7 +256,7 @@ export const SectionsManagement: React.FC = () => {
               <FormControl>
                 <TextField
                   type="text"
-                  label="Заголовок секции"
+                  label="Заголовок для секції"
                   name="section_title"
                   value={
                     editingSectionId
@@ -276,7 +276,7 @@ export const SectionsManagement: React.FC = () => {
             )}
             <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
               <Button variant="contained" onClick={saveEditedKorpus}>
-                Сохранить изменения
+                Зберегти зміни
               </Button>
             </Box>
           </div>
@@ -314,7 +314,7 @@ export const SectionsManagement: React.FC = () => {
             <FormControl>
               <TextField
                 type="text"
-                label="Название секции"
+                label="Назва секції"
                 name="section_name"
                 value={korpusNew.section_name}
                 onChange={saveKorpusNewName}
@@ -323,7 +323,7 @@ export const SectionsManagement: React.FC = () => {
             <FormControl>
               <TextField
                 type="text"
-                label="Заголовок секции"
+                label="Заголовок для секції"
                 name="section_title"
                 value={korpusNew.section_title}
                 onChange={saveKorpusNewTitle}
@@ -338,7 +338,7 @@ export const SectionsManagement: React.FC = () => {
           )}
           <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
             <Button variant="contained" onClick={saveNewKorpus}>
-              Добавить секцию
+              Додати корпус
             </Button>
           </Box>
         </DialogContent>

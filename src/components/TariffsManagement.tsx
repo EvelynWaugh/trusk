@@ -30,6 +30,7 @@ const editorContainerStyle = `
   .rdw-editor-main { 
     overflow-y: auto !important; 
     max-height: 150px !important; 
+	height: 150px !important;
   }
   .rdw-editor-toolbar { 
     margin-bottom: 0 !important; 
@@ -127,9 +128,7 @@ export const TariffsManagement: React.FC = () => {
     id: uuid(),
     tariff_name: '',
     tariff_description: '',
-    tariff_description_raw: JSON.stringify(
-      convertToRaw(EditorState.createEmpty().getCurrentContent())
-    ),
+
     lovest_price_tariff: false,
     booking_period: [],
   });
@@ -200,9 +199,7 @@ export const TariffsManagement: React.FC = () => {
       id: uuid(),
       tariff_name: '',
       tariff_description: '',
-      tariff_description_raw: JSON.stringify(
-        convertToRaw(EditorState.createEmpty().getCurrentContent())
-      ),
+
       lovest_price_tariff: false,
       booking_period: [],
     });
@@ -525,7 +522,6 @@ export const TariffsManagement: React.FC = () => {
         setTarifNew((prev: Tariff) => ({
           ...prev,
           tariff_description: htmlContent,
-          tariff_description_raw: JSON.stringify(rawContent),
         }));
       } catch (error) {
         console.error('Error converting rich text:', error);
@@ -554,7 +550,6 @@ export const TariffsManagement: React.FC = () => {
             ? {
                 ...prev,
                 tariff_description: htmlContent,
-                tariff_description_raw: JSON.stringify(rawContent),
               }
             : null
         );
@@ -567,18 +562,18 @@ export const TariffsManagement: React.FC = () => {
   return (
     <TariffsContainer>
       <Box>
-        <Typography variant="h4" gutterBottom>
-          Управление тарифами
-        </Typography>
-
         {tarifData?.map((tariff, index) => (
           <FormWrapper key={`tariff-${index}`}>
-            <BoxTypo>
-              <Typography variant="h6" component="h6">
-                {tariff.tariff_name}
-                {tariff.lovest_price_tariff && ' (Лучшая цена)'}
-              </Typography>
-            </BoxTypo>
+            <FormControl>
+              <TextField
+                disabled
+                type="text"
+                label="Назва"
+                value={tariff.tariff_name}
+              />
+            </FormControl>
+
+            {tariff.lovest_price_tariff && <span>(Краща ціна)</span>}
 
             <FormControl>
               <IconButton
@@ -615,7 +610,7 @@ export const TariffsManagement: React.FC = () => {
             <FormWrapperVertical>
               <FormControl fullWidth>
                 <TextField
-                  label="Название тарифа"
+                  label="Назва тарифу"
                   value={tarifNew.tariff_name}
                   onChange={e =>
                     setTarifNew({ ...tarifNew, tariff_name: e.target.value })
@@ -635,12 +630,12 @@ export const TariffsManagement: React.FC = () => {
                     }
                   />
                 }
-                label="Лучшая цена"
+                label="Краща ціна"
               />
 
               <Box sx={{ width: '100%', mt: 2 }}>
                 <Typography variant="h6" gutterBottom>
-                  Описание тарифа
+                  Опис тарифу
                 </Typography>
                 <div
                   style={{
@@ -667,7 +662,7 @@ export const TariffsManagement: React.FC = () => {
                 onClick={saveNewTariff}
                 sx={{ mt: 2 }}
               >
-                Сохранить
+                Зберегти
               </Button>
             </FormWrapperVertical>
           </DialogContent>
@@ -687,7 +682,7 @@ export const TariffsManagement: React.FC = () => {
                 <FormWrapperVertical>
                   <FormControl fullWidth>
                     <TextField
-                      label="Название тарифа"
+                      label="Назва тарифу"
                       value={editedTaryf.tariff_name}
                       onChange={e =>
                         setEditedTaryf({
@@ -710,12 +705,12 @@ export const TariffsManagement: React.FC = () => {
                         }
                       />
                     }
-                    label="Лучшая цена"
+                    label="Краща ціна"
                   />
 
                   <Box sx={{ width: '100%', mt: 2 }}>
                     <Typography variant="h6" gutterBottom>
-                      Описание тарифа
+                      Опис тарифу
                     </Typography>
                     <div
                       style={{
@@ -742,7 +737,7 @@ export const TariffsManagement: React.FC = () => {
                     onClick={() => saveSingleTariff(editedTaryf.id)}
                     sx={{ mt: 2 }}
                   >
-                    Сохранить
+                    Зберегти
                   </Button>
                 </FormWrapperVertical>
               )}
@@ -799,7 +794,7 @@ export const TariffsManagement: React.FC = () => {
                 <FormControl>
                   <TextField
                     type="text"
-                    label="Название"
+                    label="Назва"
                     name="name_child_new"
                     value={
                       editedChild && editedChild[childKey]

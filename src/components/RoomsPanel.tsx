@@ -1,13 +1,26 @@
 import * as TruskReact from 'trusk-react';
-import { Typography, Input } from '@mui/material';
+import { Typography, Input, FormControl } from '@mui/material';
 import {
   Person as PersonIcon,
-  PersonAdd as PersonAddIcon,
+  EscalatorWarning as EscalatorWarningIcon,
+  PersonAdd,
 } from '@mui/icons-material';
 import styled from '@emotion/styled';
-
-import type { Section, BookingPeriod, Tariff } from '@/types';
 import { useHotelStore } from '@/store/hotelStore';
+import type { Section, BookingPeriod, Tariff } from '@/types';
+
+// Utility functions to replace lodash
+const pickBy = (obj: any, predicate: (value: any, key: string) => boolean) => {
+  const result: any = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (predicate(value, key)) {
+      result[key] = value;
+    }
+  }
+  return result;
+};
+
+const startsWith = (str: string, target: string) => str.startsWith(target);
 
 const RoomRowTable = styled.div<{ rows: number }>`
   display: grid;
@@ -24,259 +37,273 @@ const RoomRowTable = styled.div<{ rows: number }>`
 const RoomsInnerRows = styled.div`
   display: flex;
   align-items: center;
+  column-gap: 10px;
+  margin-bottom: 10px;
 `;
 
-interface RoomsPanelProps {
-  data: Section[];
-  seasonData: BookingPeriod[];
-  tarifData: Tariff[];
-}
-
 const React = TruskReact;
-const { useState, useCallback, useEffect } = TruskReact;
 
-export const RoomsPanel: React.FC<RoomsPanelProps> = ({
-  data,
-  seasonData,
-  tarifData,
-}) => {
-  const { setData } = useHotelStore();
+export const RoomsPanel: React.FC = () => {
+  const { data, setData, tarifData, seasonData } = useHotelStore();
 
-  const handleRoomPriceChange = (
+  const handlechangeRoomAdult = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    sectionId: string,
-    roomId: string,
-    tariffName: string,
-    seasonName: string
+    korpus_id: string,
+    room_id: string,
+    tariff: string,
+    season: string
   ) => {
-    const newData = data.map(section => {
-      if (section.id !== sectionId) return section;
-
-      const newRooms = section.rooms.map(room => {
-        if (room.room_id !== roomId) return room;
-
-        const newTariffs = room.tariff.map(tariff => {
-          if (tariff.tariff_name !== tariffName) return tariff;
-
-          const newSeasons = tariff.booking_period.map(season => {
-            if (season.booking_period_name !== seasonName) return season;
-
-            return {
-              ...season,
-              price_for_adult: {
-                ...season.price_for_adult,
-                [e.target.name]: e.target.value,
-              },
-            };
-          });
-
-          return { ...tariff, booking_period: newSeasons };
-        });
-
-        return { ...room, tariff: newTariffs };
-      });
-
-      return { ...section, rooms: newRooms };
-    });
-
-    setData(newData);
-  };
-
-  const handleChildPriceChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    sectionId: string,
-    roomId: string,
-    tariffName: string,
-    seasonName: string,
-    childKey: string
-  ) => {
-    const newData = data.map(section => {
-      if (section.id !== sectionId) return section;
-
-      const newRooms = section.rooms.map(room => {
-        if (room.room_id !== roomId) return room;
-
-        const newTariffs = room.tariff.map(tariff => {
-          if (tariff.tariff_name !== tariffName) return tariff;
-
-          const newSeasons = tariff.booking_period.map(season => {
-            if (season.booking_period_name !== seasonName) return season;
-
-            const seasonCopy = { ...season };
-            if (seasonCopy[childKey as keyof typeof seasonCopy]) {
-              (seasonCopy as any)[childKey] = {
-                ...(seasonCopy as any)[childKey],
-                price_for_child: e.target.value,
-              };
+    const korpusDataChanged = data.map(section => {
+      const roomsdataChanged = section.rooms.map(room => {
+        if (room.room_id === room_id) {
+          const taryfModified = room.tariff.map(t => {
+            if (t.tariff_name === tariff) {
+              const seasonModified = t.booking_period.map(s => {
+                if (s.booking_period_name === season) {
+                  return {
+                    ...s,
+                    price_for_adult: {
+                      ...s.price_for_adult,
+                      [e.target.name]: e.target.value,
+                    },
+                  };
+                }
+                return s;
+              });
+              return { ...t, booking_period: seasonModified };
             }
-
-            return seasonCopy;
+            return t;
           });
-
-          return { ...tariff, booking_period: newSeasons };
-        });
-
-        return { ...room, tariff: newTariffs };
+          return { ...room, tariff: taryfModified };
+        }
+        return room;
       });
-
-      return { ...section, rooms: newRooms };
+      return section.id === korpus_id
+        ? { ...section, rooms: roomsdataChanged }
+        : section;
     });
 
-    setData(newData);
+    console.log(korpusDataChanged);
+    setData(korpusDataChanged);
   };
 
-  // Calculate the number of columns for the grid
-  const calculateColumns = () => {
-    const baseColumns = 1; // Room name column
-    const adultColumns = Math.max(
-      ...data.flatMap(section =>
-        section.rooms.map(
-          room =>
-            Object.keys(
-              room.tariff[0]?.booking_period[0]?.price_for_adult || {}
-            ).length
-        )
-      )
-    );
-    const childColumns = Math.max(
-      ...data.flatMap(section =>
-        section.rooms.map(room => {
-          const season = room.tariff[0]?.booking_period[0];
-          if (!season) return 0;
-          return Object.keys(season).filter(key =>
-            key.startsWith('price_for_child')
-          ).length;
-        })
-      )
-    );
-    return baseColumns + adultColumns + childColumns;
+  const handlechangeRoomExtra = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    korpus_id: string,
+    room_id: string,
+    tariff: string,
+    season: string
+  ) => {
+    const korpusDataChanged = data.map(section => {
+      const roomsdataChanged = section.rooms.map(room => {
+        if (room.room_id === room_id) {
+          const taryfModified = room.tariff.map(t => {
+            if (t.tariff_name === tariff) {
+              const seasonModified = t.booking_period.map(s => {
+                if (s.booking_period_name === season) {
+                  return {
+                    ...s,
+                    dodatkove_mistse: e.target.value,
+                  };
+                }
+                return s;
+              });
+              return { ...t, booking_period: seasonModified };
+            }
+            return t;
+          });
+          return { ...room, tariff: taryfModified };
+        }
+        return room;
+      });
+      return section.id === korpus_id
+        ? { ...section, rooms: roomsdataChanged }
+        : section;
+    });
+
+    console.log(korpusDataChanged);
+    setData(korpusDataChanged);
   };
 
-  const columns = calculateColumns();
+  const handleChangeChild = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    korpus_id: string,
+    room_id: string,
+    tariff: string,
+    season: string,
+    kids_tarriff_name: string
+  ) => {
+    const korpusDataChanged = data.map(section => {
+      const roomsdataChanged = section.rooms.map(room => {
+        if (room.room_id === room_id) {
+          const taryfModified = room.tariff.map(t => {
+            if (t.tariff_name === tariff) {
+              const seasonModified = t.booking_period.map(s => {
+                if (s.booking_period_name === season) {
+                  return {
+                    ...s,
+                    price_for_child: s.price_for_child.map(c =>
+                      kids_tarriff_name === c.kids_tarriff_name
+                        ? { ...c, kids_tarriff_price: e.target.value }
+                        : c
+                    ),
+                  };
+                }
+                return s;
+              });
+              return { ...t, booking_period: seasonModified };
+            }
+            return t;
+          });
+          return { ...room, tariff: taryfModified };
+        }
+        return room;
+      });
+      return section.id === korpus_id
+        ? { ...section, rooms: roomsdataChanged }
+        : section;
+    });
+    console.log(korpusDataChanged);
+    setData(korpusDataChanged);
+  };
 
   return (
     <div>
       {data.map(section => (
         <div key={section.id}>
-          <Typography variant="h5" gutterBottom>
+          <Typography align="center" component="h3" variant="h3">
             {section.section_name}
           </Typography>
-
-          {tarifData.map(tariff => (
-            <div key={tariff.id} style={{ marginBottom: '30px' }}>
-              <Typography variant="h6" gutterBottom>
-                {tariff.tariff_name}
-              </Typography>
-
-              {seasonData.map(season => (
-                <div key={season.id} style={{ marginBottom: '20px' }}>
-                  <Typography variant="subtitle1" gutterBottom>
-                    {season.booking_period_name}
-                  </Typography>
-
-                  {/* Header Row */}
-                  <RoomRowTable rows={columns}>
-                    <div>
-                      <Typography variant="body2" fontWeight="bold">
-                        Номер
-                      </Typography>
-                    </div>
-
-                    {/* Adult Price Headers */}
-                    {Object.keys(season.price_for_adult || {}).map(adultKey => (
-                      <div key={adultKey}>
+          {section.rooms.map((sRoom, ri) => (
+            <div key={`room-${ri}`}>
+              <RoomRowTable
+                className="header_room"
+                rows={seasonData.length + 1}
+              >
+                <Typography variant="h5" component="h5">
+                  {sRoom.room_name}
+                </Typography>
+                {seasonData.map((season, si) => (
+                  <div key={`season-${si}`}>
+                    <Typography variant="body1" component="span">
+                      {season.booking_period_name}
+                    </Typography>
+                    {season.booking_period_dates.map((date_period, i) => (
+                      <div
+                        key={`dates-${i}`}
+                      >{`${date_period.booking_period_begin}-${date_period.booking_period_end}`}</div>
+                    ))}
+                  </div>
+                ))}
+              </RoomRowTable>
+              {sRoom.tariff.map((tarif, indexT) => (
+                <RoomRowTable
+                  rows={seasonData.length + 1}
+                  key={`tariff-${indexT}`}
+                >
+                  <div>{tarif.tariff_name}</div>
+                  {tarif.booking_period
+                    .sort((a, b) => {
+                      return a.position - b.position;
+                    })
+                    .map((season, indexS) => (
+                      <div key={`season-${indexS}`}>
                         <RoomsInnerRows>
-                          <PersonIcon />
-                          <Typography variant="body2" fontWeight="bold">
-                            {adultKey.replace('-adult', ' взр.')}
-                          </Typography>
+                          <div>
+                            <PersonIcon color="primary" />
+                          </div>
+                          <Typography>Дорослі, грн</Typography>
                         </RoomsInnerRows>
+                        {Array.from({
+                          length: parseInt(sRoom.adults_number),
+                        }).map((_, i) => {
+                          return (
+                            <RoomsInnerRows key={`adult-${i}`}>
+                              <span>{i + 1}</span>
+                              <FormControl>
+                                <Input
+                                  type="text"
+                                  name={`${i + 1}-adult`}
+                                  onChange={e =>
+                                    handlechangeRoomAdult(
+                                      e,
+                                      section.id,
+                                      sRoom.room_id,
+                                      tarif.tariff_name,
+                                      season.booking_period_name
+                                    )
+                                  }
+                                  value={
+                                    season.price_for_adult[`${i + 1}-adult`] ||
+                                    ''
+                                  }
+                                />
+                              </FormControl>
+                            </RoomsInnerRows>
+                          );
+                        })}
+                        {season.price_for_child.length > 0 && (
+                          <RoomsInnerRows>
+                            <div>
+                              <EscalatorWarningIcon color="primary" />
+                            </div>
+                            <Typography>Діти, грн</Typography>
+                          </RoomsInnerRows>
+                        )}
+                        {season.price_for_child.map((child_row, i) => (
+                          <RoomsInnerRows key={`child-${i}`}>
+                            <div>
+                              <Typography variant="body2" component="span">
+                                {child_row.kids_tarriff_name}
+                              </Typography>
+                            </div>
+                            <FormControl>
+                              <Input
+                                type="text"
+                                value={child_row.kids_tarriff_price || ''}
+                                onChange={e =>
+                                  handleChangeChild(
+                                    e,
+                                    section.id,
+                                    sRoom.room_id,
+                                    tarif.tariff_name,
+                                    season.booking_period_name,
+                                    child_row.kids_tarriff_name
+                                  )
+                                }
+                              />
+                            </FormControl>
+                          </RoomsInnerRows>
+                        ))}
+
+                        <RoomsInnerRows>
+                          <div>
+                            <PersonAdd color="primary" />
+                          </div>
+                          <Typography>Додаткове, грн</Typography>
+                        </RoomsInnerRows>
+
+                        <div>
+                          <FormControl>
+                            <Input
+                              type="text"
+                              name="dodatkove_mistse"
+                              onChange={e =>
+                                handlechangeRoomExtra(
+                                  e,
+                                  section.id,
+                                  sRoom.room_id,
+                                  tarif.tariff_name,
+                                  season.booking_period_name
+                                )
+                              }
+                              value={season.dodatkove_mistse || ''}
+                            />
+                          </FormControl>
+                        </div>
                       </div>
                     ))}
-
-                    {/* Child Price Headers */}
-                    {season.price_for_child &&
-                      season.price_for_child?.map((child, index) => (
-                        <div key={index}>
-                          <RoomsInnerRows>
-                            <PersonAddIcon />
-                            <Typography variant="body2" fontWeight="bold">
-                              {child.kids_tarriff_name}
-                            </Typography>
-                          </RoomsInnerRows>
-                        </div>
-                      ))}
-                  </RoomRowTable>
-
-                  {/* Data Rows */}
-                  {section.rooms.map(room => {
-                    const roomTariff = room.tariff.find(
-                      t => t.tariff_name === tariff.tariff_name
-                    );
-                    const roomSeason = roomTariff?.booking_period.find(
-                      s => s.booking_period_name === season.booking_period_name
-                    );
-
-                    if (!roomSeason) return null;
-
-                    return (
-                      <RoomRowTable key={room.room_id} rows={columns}>
-                        <div>
-                          <Typography variant="body2">
-                            {room.room_name}
-                          </Typography>
-                        </div>
-
-                        {/* Adult Price Inputs */}
-                        {Object.entries(roomSeason.price_for_adult || {}).map(
-                          ([adultKey, price]) => (
-                            <div key={adultKey}>
-                              <Input
-                                type="number"
-                                name={adultKey}
-                                value={price}
-                                onChange={e =>
-                                  handleRoomPriceChange(
-                                    e,
-                                    section.id,
-                                    room.room_id,
-                                    tariff.tariff_name,
-                                    season.booking_period_name
-                                  )
-                                }
-                                placeholder="Цена"
-                              />
-                            </div>
-                          )
-                        )}
-
-                        {/* Child Price Inputs */}
-                        {roomSeason.price_for_child &&
-                          roomSeason.price_for_child?.map((child, index) => (
-                            <div key={index}>
-                              <Input
-                                type="number"
-                                value={child.kids_tarriff_price}
-                                onChange={e =>
-                                  handleChildPriceChange(
-                                    e,
-                                    section.id,
-                                    room.room_id,
-                                    tariff.tariff_name,
-                                    season.booking_period_name,
-                                    `price_for_child${
-                                      index > 0 ? `_${index + 1}` : ''
-                                    }`
-                                  )
-                                }
-                                placeholder="Цена"
-                              />
-                            </div>
-                          ))}
-                      </RoomRowTable>
-                    );
-                  })}
-                </div>
+                </RoomRowTable>
               ))}
             </div>
           ))}

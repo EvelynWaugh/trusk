@@ -129,7 +129,7 @@ See in /src/adminTruskavetsk.js - there are 4 Tabs (Sections/and their Rooms, Ta
                     "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
                     "tariff_name": "Лікувальна путівка",
                     "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
-                    "tariff_description_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+
                     "lovest_price_tariff": false,
                     "booking_period": [
                         {
@@ -160,7 +160,7 @@ See in /src/adminTruskavetsk.js - there are 4 Tabs (Sections/and their Rooms, Ta
                     "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
                     "tariff_name": "Оздоровча путівка",
                     "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
-                    "tariff_description_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+ 
                     "lovest_price_tariff": true,
                     "booking_period": [
                         {
@@ -222,13 +222,11 @@ See in /src/adminTruskavetsk.js - there are 4 Tabs (Sections/and their Rooms, Ta
                 "room_info": "<p><strong>В номері:</strong></p>\n<ul>\n<li>14 кв.м., 1 комната, ремонт</li>\n<li>полуторная кровать 140*200</li>\n<li>санузел - душ, полотенца</li>\n<li>холодильник, ТV, чайник, фен</li>\n</ul>\n",
                 "adults_number": "1",
                 "lovest_price_room": false,
-                "room_info_raw": "{\"blocks\":[{\"key\":\"8ic36\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"6g218\",\"text\":\"14 кв.м., 1 комната, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"555a5\",\"text\":\"полуторная кровать 140*200\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"3dt38\",\"text\":\"санузел - душ, полотенца\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"8ui51\",\"text\":\"холодильник, ТV, чайник, фен\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
                 "tariff": [
                     {
                         "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
                         "tariff_name": "Лечебная путевка",
                         "tariff_description": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
-                        "tariff_description_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
                         "lovest_price_tariff": false,
                         "booking_period": [
                             {
@@ -281,7 +279,7 @@ See in /src/adminTruskavetsk.js - there are 4 Tabs (Sections/and their Rooms, Ta
                         "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
                         "tariff_name": "Оздоровительная путевка",
                         "tariff_description": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
-                        "tariff_description_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+
                         "lovest_price_tariff": true,
                         "booking_period": [
                             {
@@ -336,7 +334,7 @@ See in /src/adminTruskavetsk.js - there are 4 Tabs (Sections/and their Rooms, Ta
                     "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
                     "tariff_name": "Лікувальна путівка",
                     "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
-                    "tariff_description_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+
                     "lovest_price_tariff": false,
                     "booking_period": [
                         {
@@ -368,7 +366,7 @@ See in /src/adminTruskavetsk.js - there are 4 Tabs (Sections/and their Rooms, Ta
                     "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
                     "tariff_name": "Оздоровча путівка",
                     "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
-                    "tariff_description_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+
                     "lovest_price_tariff": true,
                     "booking_period": [
                         {
@@ -431,13 +429,12 @@ See in /src/adminTruskavetsk.js - there are 4 Tabs (Sections/and their Rooms, Ta
                 "room_info": "<p><strong>В номері:</strong></p>\n<ul>\n<li>18 кв.м., 1 комната, ремонт</li>\n<li>две односпальные кровати 90*200см.</li>\n<li>санузел - душ, полотенца</li>\n<li>холодильник, ТV, чайник, фен</li>\n</ul>\n",
                 "adults_number": "2",
                 "lovest_price_room": false,
-                "room_info_raw": "{\"blocks\":[{\"key\":\"33g1b\",\"text\":\"В номері:\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":9,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}},{\"key\":\"4agjj\",\"text\":\"18 кв.м., 1 комната, ремонт\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"dp8cp\",\"text\":\"две односпальные кровати 90*200см.\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"dcuag\",\"text\":\"санузел - душ, полотенца\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"1b18e\",\"text\":\"холодильник, ТV, чайник, фен\",\"type\":\"unordered-list-item\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
                 "tariff": [
                     {
                         "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
                         "tariff_name": "Лечебная путевка",
                         "tariff_description": "<p><strong>В стоимость номера включено:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>базовое лечение по назначению врача</li>\n<li>пользование бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Дополнительное место:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без места и питания - безплатно</li>\n<li>дополнительное место с 4 лет - 400 грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны.</li>\n</ul>\n",
-                        "tariff_description_raw": "{\"blocks\":[{\"key\":\"1klli\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+ 
                         "lovest_price_tariff": false,
                         "booking_period": [
                             {
@@ -491,7 +488,7 @@ See in /src/adminTruskavetsk.js - there are 4 Tabs (Sections/and their Rooms, Ta
                         "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
                         "tariff_name": "Оздоровительная путевка",
                         "tariff_description": "<p><strong>В стоимость номера включенно:</strong></p>\n<ul>\n<li>проживание</li>\n<li>трехразовое питание</li>\n<li>консультация врача</li>\n<li>пользование бюветом</li>\n<li>кислородная пенка, фиточай, массаж одной единицы</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживание детей до 4 лет без міста и питания - безплатно</li>\n<li>проживание детей от 4 лет - 400грн/сутки</li>\n<li>детям на основное место скидки не предусмотренны</li>\n</ul>\n",
-                        "tariff_description_raw": "{\"blocks\":[{\"key\":\"4gpil\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+
                         "lovest_price_tariff": true,
                         "booking_period": [
                             {

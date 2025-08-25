@@ -190,8 +190,7 @@ class Hotel_Ajax {
 			$sanitized_room['room_main_foto']    = intval( $room['room_main_foto'] ?? 0 );
 
 			// Sanitize HTML content
-			$sanitized_room['room_info']     = wp_kses_post( $room['room_info'] ?? '' );
-			$sanitized_room['room_info_raw'] = sanitize_textarea_field( $room['room_info_raw'] ?? '' );
+			$sanitized_room['room_info'] = $room['room_info'] ?? '';
 
 			// Sanitize arrays
 			if ( isset( $room['room_gallery'] ) && is_array( $room['room_gallery'] ) ) {
@@ -271,12 +270,11 @@ class Hotel_Ajax {
 				continue;
 			}
 
-			$sanitized_tariff                           = array();
-			$sanitized_tariff['id']                     = sanitize_text_field( $tariff['id'] ?? '' );
-			$sanitized_tariff['tariff_name']            = sanitize_text_field( $tariff['tariff_name'] ?? '' );
-			$sanitized_tariff['tariff_description']     = wp_kses_post( $tariff['tariff_description'] ?? '' );
-			$sanitized_tariff['tariff_description_raw'] = sanitize_textarea_field( $tariff['tariff_description_raw'] ?? '' );
-			$sanitized_tariff['lovest_price_tariff']    = (bool) ( $tariff['lovest_price_tariff'] ?? false );
+			$sanitized_tariff                        = array();
+			$sanitized_tariff['id']                  = sanitize_text_field( $tariff['id'] ?? '' );
+			$sanitized_tariff['tariff_name']         = sanitize_text_field( $tariff['tariff_name'] ?? '' );
+			$sanitized_tariff['tariff_description']  = $tariff['tariff_description'] ?? '';
+			$sanitized_tariff['lovest_price_tariff'] = (bool) ( $tariff['lovest_price_tariff'] ?? false );
 
 			// Sanitize booking periods
 			if ( isset( $tariff['booking_period'] ) && is_array( $tariff['booking_period'] ) ) {

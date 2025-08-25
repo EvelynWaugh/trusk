@@ -135,6 +135,13 @@ class Hotel_Metabox {
 			$tarifs  = get_post_meta( $post->ID, 'trusk_tarif_data', true );
 			$seasons = get_post_meta( $post->ID, 'trusk_season_data', true );
 
+			$child_tariff = get_post_meta( $post->ID, 'trusk_child_data', true );
+
+			// If no child tariff meta data exists, extract from rooms
+			if ( empty( $child_tariff ) && ! empty( $rooms ) ) {
+				$child_tariff = $this->extract_child_tariffs_from_rooms( $rooms );
+			}
+
 			$existing_tariffs     = array();
 			$rooms_missing_tariff = array();
 
@@ -161,16 +168,7 @@ class Hotel_Metabox {
 								);
 							}
 							if ( ! isset( $period_value['price_for_child'] ) || empty( $period_value['price_for_child'] ) ) {
-								$period_value['price_for_child'] = array(
-									array(
-										'kids_tarriff_name'  => '0-5',
-										'kids_tarriff_price' => '-',
-									),
-									array(
-										'kids_tarriff_name'  => '6-11',
-										'kids_tarriff_price' => '-',
-									),
-								);
+								$period_value['price_for_child'] = $child_tariff;
 							}
 						}
 					}
@@ -187,21 +185,6 @@ class Hotel_Metabox {
 
 					$rooms[ $key ]['tariff'] = $existing_tariffs;
 				}
-			}
-
-			$child_tariff = get_post_meta( $post->ID, 'trusk_child_data', true );
-
-			// If no child tariff meta data exists, extract from rooms
-			if ( empty( $child_tariff ) && ! empty( $rooms ) ) {
-				$child_tariff = $this->extract_child_tariffs_from_rooms( $rooms );
-			}
-
-			// Fallback to default structure if still empty
-			if ( empty( $child_tariff ) ) {
-				$child_tariff = array(
-					'price_for_child'   => array( 'kids_tarriff_name' => '0-5' ),
-					'price_for_child_2' => array( 'kids_tarriff_name' => '6-11' ),
-				);
 			}
 
 			// wrap rooms in section array for acf
@@ -225,7 +208,7 @@ class Hotel_Metabox {
 					'rooms'   => $rooms,
 					'tarifs'  => ! empty( $tarifs ) ? $tarifs : false,
 					'seasons' => ! empty( $seasons ) ? $seasons : false,
-					'child'   => $child_tariff,
+					'child'   => array_values( $child_tariff ),
 
 				)
 			);
@@ -271,9 +254,8 @@ class Hotel_Metabox {
 										$child_name = $child_tariff['kids_tarriff_name'];
 										// Only add if not already processed
 										if ( ! empty( $child_name ) && ! in_array( $child_name, $child_tariff_names, true ) ) {
-											$child_tariff_names[]     = $child_name;
-											$child_key                = 'price_for_child' . ( count( $child_data ) > 0 ? '_' . ( count( $child_data ) + 1 ) : '' );
-											$child_data[ $child_key ] = array(
+											$child_tariff_names[] = $child_name;
+											$child_data[]         = array(
 												'kids_tarriff_name' => $child_name,
 											);
 										}
