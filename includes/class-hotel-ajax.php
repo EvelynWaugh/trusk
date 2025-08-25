@@ -107,9 +107,10 @@ class Hotel_Ajax {
 			if ( false !== $updated ) {
 				wp_send_json_success(
 					array(
-						'message'   => __( 'Hotel data saved successfully', 'hotel-metabox' ),
-						'post_id'   => $post_id,
-						'timestamp' => current_time( 'mysql' ),
+						'message'        => __( 'Hotel data saved successfully', 'hotel-metabox' ),
+						'post_id'        => $post_id,
+						'timestamp'      => current_time( 'mysql' ),
+						'sanitized_data' => $sanitized_data,
 					)
 				);
 			} else {
@@ -189,6 +190,19 @@ class Hotel_Ajax {
 			$sanitized_room['lovest_price_room'] = (bool) ( $room['lovest_price_room'] ?? false );
 			$sanitized_room['room_main_foto']    = intval( $room['room_main_foto'] ?? 0 );
 
+			// New room fields
+			$hide_room_value                   = $room['hide_room'] ?? 'no';
+			$sanitized_room['hide_room']       = in_array( $hide_room_value, array( 'yes', 'no' ), true ) ? $hide_room_value : 'no';
+			$sanitized_room['number_of_rooms'] = max( 0, intval( $room['number_of_rooms'] ?? 1 ) );
+			$sanitized_room['ploshha_nomeru']  = sanitize_text_field( $room['ploshha_nomeru'] ?? '' );
+
+			// Sanitize in_room_amenities
+			if ( isset( $room['in_room_amenities'] ) && is_array( $room['in_room_amenities'] ) ) {
+				$sanitized_room['in_room_amenities'] = $this->sanitize_room_amenities( $room['in_room_amenities'] );
+			} else {
+				$sanitized_room['in_room_amenities'] = array();
+			}
+
 			// Sanitize HTML content
 			$sanitized_room['room_info'] = $room['room_info'] ?? '';
 
@@ -237,7 +251,7 @@ class Hotel_Ajax {
 	/**
 	 * Sanitize features data
 	 *
-	 * @param array $features Raw features data
+	 * @param array $features Raw features data.
 	 * @return array Sanitized features data
 	 */
 	private function sanitize_features_data( $features ) {
@@ -251,6 +265,34 @@ class Hotel_Ajax {
 			$sanitized[] = array(
 				'feature' => sanitize_text_field( $feature['feature'] ?? '' ),
 			);
+		}
+
+		return $sanitized;
+	}
+
+	/**
+	 * Sanitize room amenities data
+	 *
+	 * @param array $amenities Raw amenities data.
+	 * @return array Sanitized amenities data
+	 */
+	private function sanitize_room_amenities( $amenities ) {
+		$sanitized = array();
+
+		// Get valid amenity IDs from the room features function
+		$valid_amenities = array();
+		if ( function_exists( 'trusk_get_room_features' ) ) {
+			$room_features = trusk_get_room_features();
+			foreach ( $room_features as $feature ) {
+				$valid_amenities[] = $feature['id'];
+			}
+		}
+
+		foreach ( $amenities as $amenity_id => $value ) {
+			// Only save amenities that are in our valid list
+			if ( in_array( $amenity_id, $valid_amenities, true ) ) {
+				$sanitized[ sanitize_key( $amenity_id ) ] = sanitize_text_field( $value );
+			}
 		}
 
 		return $sanitized;

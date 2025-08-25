@@ -37,10 +37,25 @@ export interface KeyFeature {
   feature: string;
 }
 
+export interface RoomAmenity {
+  id: string;
+  name: string;
+  type: 'radio' | 'text';
+  value: string;
+}
+
+export interface InRoomAmenities {
+  [key: string]: string;
+}
+
 export interface Room {
   room_name: string;
   room_id: string;
   room_main_foto: number;
+  hide_room: 'yes' | 'no';
+  number_of_rooms: number;
+  ploshha_nomeru: string;
+  in_room_amenities?: InRoomAmenities;
   room_gallery: GalleryImage[];
   key_features: KeyFeature[];
   room_info: string;

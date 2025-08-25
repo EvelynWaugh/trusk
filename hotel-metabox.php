@@ -52,6 +52,7 @@ class HotelMetabox {
 	 */
 	private function load_dependencies() {
 
+		require_once HOTEL_METABOX_PLUGIN_DIR . 'includes/functions.php';
 		require_once HOTEL_METABOX_PLUGIN_DIR . 'includes/class-hotel-metabox.php';
 		require_once HOTEL_METABOX_PLUGIN_DIR . 'includes/class-hotel-assets.php';
 		require_once HOTEL_METABOX_PLUGIN_DIR . 'includes/class-hotel-admin-notice.php';

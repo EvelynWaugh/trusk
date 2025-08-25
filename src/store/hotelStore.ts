@@ -7,7 +7,16 @@ import type {
   ChildTariff,
   DialogState,
 } from '@/types';
-const { get, omitDeep, pickBy, startsWith } = lodash;
+import { migrateSectionData } from '@/utils/dataMigration';
+
+declare global {
+  interface Window {
+    lodash: any;
+    TRUSKA_DATA: any;
+  }
+}
+
+const { get } = window.lodash || {};
 
 interface HotelState {
   // Main data
@@ -97,7 +106,9 @@ const initialSeason: BookingPeriod = {
   price_for_child: [],
 };
 
-const data = TRUSKA_DATA?.section || TRUSKA_DATA?.acf || [];
+const data = migrateSectionData(
+  window.TRUSKA_DATA?.section || window.TRUSKA_DATA?.acf || []
+);
 
 // const childData = omitDeep(
 //   pickBy(
@@ -112,7 +123,7 @@ const data = TRUSKA_DATA?.section || TRUSKA_DATA?.acf || [];
 //   price_for_child_2: { kids_tarriff_name: '6-11' },
 // };
 
-const childData = TRUSKA_DATA?.child || [];
+const childData = window.TRUSKA_DATA?.child || [];
 
 export const useHotelStore = create<HotelState>()(
   devtools(

@@ -63,9 +63,10 @@ if (typeof document !== 'undefined') {
   document.head.appendChild(styleElement);
 }
 
-import type { Room, Section } from '@/types';
+import type { Room, Section, InRoomAmenities } from '@/types';
 import { useHotelStore } from '@/store/hotelStore';
 import { DragDropProvider, SortableItem } from '@/components/shared/DragDrop';
+import RoomAmenities from '@/components/RoomAmenities';
 import {
   IconButtonAdd,
   CharacteFormControl,
@@ -182,6 +183,10 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
     room_name: '',
     room_id: uuid(),
     room_main_foto: 0,
+    hide_room: 'no',
+    number_of_rooms: 1,
+    ploshha_nomeru: '',
+    in_room_amenities: {},
     room_gallery: [],
     key_features: [
       {
@@ -570,7 +575,69 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
   };
 
   const removeRoom = (room_id: string) => {
-    const newRooms = section.rooms.filter(room => room.room_id !== room_id);
+    const newRooms = section.rooms.filter(
+      (room: Room) => room.room_id !== room_id
+    );
+    updateSection({ ...section, rooms: newRooms });
+  };
+
+  const setHideRoom = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    room_id: string
+  ) => {
+    const newRooms = section.rooms.map((room: Room) =>
+      room.room_id === room_id
+        ? {
+            ...room,
+            hide_room: e.target.checked ? 'yes' : 'no',
+          }
+        : room
+    );
+    updateSection({ ...section, rooms: newRooms });
+  };
+
+  const setNumberOfRooms = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    room_id: string
+  ) => {
+    const newRooms = section.rooms.map((room: Room) =>
+      room.room_id === room_id
+        ? {
+            ...room,
+            number_of_rooms: parseInt(e.target.value) || 0,
+          }
+        : room
+    );
+    updateSection({ ...section, rooms: newRooms });
+  };
+
+  const setRoomArea = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    room_id: string
+  ) => {
+    const newRooms = section.rooms.map((room: Room) =>
+      room.room_id === room_id
+        ? {
+            ...room,
+            ploshha_nomeru: e.target.value,
+          }
+        : room
+    );
+    updateSection({ ...section, rooms: newRooms });
+  };
+
+  const handleAmenitiesChange = (
+    room_id: string,
+    amenities: InRoomAmenities
+  ) => {
+    const newRooms = section.rooms.map((room: Room) =>
+      room.room_id === room_id
+        ? {
+            ...room,
+            in_room_amenities: amenities,
+          }
+        : room
+    );
     updateSection({ ...section, rooms: newRooms });
   };
 
@@ -724,6 +791,44 @@ export const Rooms = forwardRef<RoomsRef, RoomsProps>(({ sections }, ref) => {
                           onChange={e => setRoomID(e, room.room_id)}
                         />
                       </FormControl>
+                    </div>
+
+                    <div style={{ marginBottom: '10px' }}>
+                      <FormControl sx={{ marginRight: '10px' }}>
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={room.hide_room === 'yes'}
+                              onChange={e => setHideRoom(e, room.room_id)}
+                            />
+                          }
+                          label="Приховати номер"
+                        />
+                      </FormControl>
+                      <FormControl sx={{ marginRight: '10px' }}>
+                        <TextField
+                          label="Кількість номерів"
+                          type="number"
+                          value={room.number_of_rooms || ''}
+                          onChange={e => setNumberOfRooms(e, room.room_id)}
+                          inputProps={{ min: 0 }}
+                        />
+                      </FormControl>
+                      <FormControl sx={{ marginRight: '10px' }}>
+                        <TextField
+                          label="Площа номеру (кв.м)"
+                          value={room.ploshha_nomeru || ''}
+                          onChange={e => setRoomArea(e, room.room_id)}
+                        />
+                      </FormControl>
+                    </div>
+
+                    <div style={{ marginBottom: '10px' }}>
+                      <RoomAmenities
+                        roomId={room.room_id}
+                        amenities={room.in_room_amenities || {}}
+                        onAmenitiesChange={handleAmenitiesChange}
+                      />
                     </div>
 
                     <div>
