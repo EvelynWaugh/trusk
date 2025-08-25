@@ -55,6 +55,7 @@ class HotelMetabox {
 		require_once HOTEL_METABOX_PLUGIN_DIR . 'includes/class-hotel-metabox.php';
 		require_once HOTEL_METABOX_PLUGIN_DIR . 'includes/class-hotel-assets.php';
 		require_once HOTEL_METABOX_PLUGIN_DIR . 'includes/class-hotel-admin-notice.php';
+		require_once HOTEL_METABOX_PLUGIN_DIR . 'includes/class-hotel-ajax.php';
 	}
 
 	/**
@@ -70,6 +71,9 @@ class HotelMetabox {
 
 		// Initialize admin notices
 		new Hotel_Admin_Notice();
+
+		// Initialize AJAX handlers
+		new Hotel_Ajax();
 	}
 
 	/**

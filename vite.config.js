@@ -3,29 +3,31 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+		 jsxRuntime: 'automatic',
+	})
+  ],
   build: {
     outDir: 'assets/dist',
-    rollupOptions: {
+	 target: 'es2020', // Modern ES modules support
+  rollupOptions: {
       input: {
-        'hotel-metabox': resolve(__dirname, 'src/adminTruskavetsk.js'),
+        'hotel-metabox': resolve(__dirname, 'src/index.tsx'),
       },
       output: {
+        format: 'iife',
+        name: 'TruskAdminApp',
         entryFileNames: '[name].js',
         chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
+        assetFileNames: '[name].[ext]',
+        globals: {}
       },
-      external: [
-        'react',
-        'react-dom',
-        '@wordpress/element',
-        '@wordpress/i18n',
-        '@wordpress/api-fetch'
-      ]
+      external: []
     },
-    lib: false,
-    minify: 'terser',
-    sourcemap: true
+
+    minify: process.env.NODE_ENV === 'production' ? 'esbuild' : false,
+	sourcemap: process.env.NODE_ENV === 'development',
   },
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
@@ -37,7 +39,10 @@ export default defineConfig({
       '@hooks': resolve(__dirname, 'src/hooks'),
       '@store': resolve(__dirname, 'src/store'),
       '@types': resolve(__dirname, 'src/types'),
-      '@utils': resolve(__dirname, 'src/utils')
+      '@utils': resolve(__dirname, 'src/utils'),
+	// Alias React to avoid conflicts with WordPress React
+      'trusk-react': 'react',
+      'trusk-react-dom': 'react-dom'
     }
   },
   server: {

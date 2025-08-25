@@ -1133,7 +1133,7 @@ export default function AdminTruskavetsk() {
             </div>
           </DialogContent>
         </Dialog>
-        <Tooltip title="Додати корпус" placement="top">
+        <Tooltip title="Добавить секцию" placement="top">
           <IconButtonAdd
             color="inherit"
             size="large"
