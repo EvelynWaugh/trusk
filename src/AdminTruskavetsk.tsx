@@ -62,62 +62,62 @@ export const AdminTruskavetsk: React.FC = () => {
   console.log(data);
 
   // Initialize data from WordPress global
-  useEffect(() => {
-    if (window.TRUSKA_DATA) {
-      const { section, tarifs, seasons } = window.TRUSKA_DATA;
+  //   useEffect(() => {
+  //     if (window.TRUSKA_DATA) {
+  //       const { section, tarifs, seasons } = window.TRUSKA_DATA;
 
-      // Initialize sections data
-      if (section && section.length > 0) {
-        const maybeAddIds = (sections: Section[]) => {
-          return sections.map(section => {
-            if (section.hasOwnProperty('id')) {
-              return section;
-            }
-            return { ...section, id: uuid() };
-          });
-        };
+  //       // Initialize sections data
+  //       if (section && section.length > 0) {
+  //         const maybeAddIds = (sections: Section[]) => {
+  //           return sections.map(section => {
+  //             if (section.hasOwnProperty('id')) {
+  //               return section;
+  //             }
+  //             return { ...section, id: uuid() };
+  //           });
+  //         };
 
-        const initialData = maybeAddIds(section);
-        setData(initialData);
-      }
+  //         const initialData = maybeAddIds(section);
+  //         setData(initialData);
+  //       }
 
-      // Initialize tariffs data
-      if (tarifs && Array.isArray(tarifs)) {
-        setTarifData(tarifs);
-      }
+  //       // Initialize tariffs data
+  //       if (tarifs && Array.isArray(tarifs)) {
+  //         setTarifData(tarifs);
+  //       }
 
-      // Initialize seasons data
-      if (seasons && Array.isArray(seasons)) {
-        setSeasonData(seasons);
-      }
+  //       // Initialize seasons data
+  //       if (seasons && Array.isArray(seasons)) {
+  //         setSeasonData(seasons);
+  //       }
 
-      // Legacy initialization logic as fallback
-      if (section && section.length > 0 && section[0].rooms?.length > 0) {
-        const firstRoom = section[0].rooms[0];
-        if (firstRoom.tariff?.length > 0 && (!tarifs || tarifs === false)) {
-          setTarifData(firstRoom.tariff);
+  //       // Legacy initialization logic as fallback
+  //       if (section && section.length > 0 && section[0].rooms?.length > 0) {
+  //         const firstRoom = section[0].rooms[0];
+  //         if (firstRoom.tariff?.length > 0 && (!tarifs || tarifs === false)) {
+  //           setTarifData(firstRoom.tariff);
 
-          const firstTariff = firstRoom.tariff[0];
-          if (
-            firstTariff.booking_period?.length > 0 &&
-            (!seasons || seasons === false)
-          ) {
-            setSeasonData(firstTariff.booking_period);
+  //           const firstTariff = firstRoom.tariff[0];
+  //           if (
+  //             firstTariff.booking_period?.length > 0 &&
+  //             (!seasons || seasons === false)
+  //           ) {
+  //             setSeasonData(firstTariff.booking_period);
 
-            const firstSeason = firstTariff.booking_period[0];
-            const childTariffs = Object.keys(firstSeason)
-              .filter(key => key.startsWith('price_for_child'))
-              .reduce((acc, key) => {
-                acc[key] = firstSeason[key as keyof typeof firstSeason] as any;
-                return acc;
-              }, {} as any);
+  //             const firstSeason = firstTariff.booking_period[0];
+  //             const childTariffs = Object.keys(firstSeason)
+  //               .filter(key => key.startsWith('price_for_child'))
+  //               .reduce((acc, key) => {
+  //                 acc[key] = firstSeason[key as keyof typeof firstSeason] as any;
+  //                 return acc;
+  //               }, {} as any);
 
-            setChildData(childTariffs);
-          }
-        }
-      }
-    }
-  }, [setData, setTarifData, setSeasonData, setChildData]);
+  //             setChildData(childTariffs);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }, [setData, setTarifData, setSeasonData, setChildData]);
 
   //Update wp.media
   useEffect(() => {

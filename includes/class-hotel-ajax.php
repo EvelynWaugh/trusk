@@ -362,10 +362,12 @@ class Hotel_Ajax {
 		$rooms_data   = array();
 		$tariffs_data = array();
 		$seasons_data = array();
+		$child_data   = array();
 
 		// Track unique IDs to prevent duplicates
-		$tariff_ids = array();
-		$season_ids = array();
+		$tariff_ids         = array();
+		$season_ids         = array();
+		$child_tariff_names = array();
 
 		foreach ( $data as $section ) {
 			if ( isset( $section['rooms'] ) && is_array( $section['rooms'] ) ) {
@@ -391,6 +393,22 @@ class Hotel_Ajax {
 										$season_ids[]   = $season_id;
 										$seasons_data[] = $season;
 									}
+
+									// Extract child tariffs from seasons
+									if ( isset( $season['price_for_child'] ) && is_array( $season['price_for_child'] ) ) {
+										foreach ( $season['price_for_child'] as $child_tariff ) {
+											if ( is_array( $child_tariff ) && isset( $child_tariff['kids_tarriff_name'] ) ) {
+												$child_name = $child_tariff['kids_tarriff_name'];
+												// Only add child tariff if name hasn't been seen before
+												if ( ! empty( $child_name ) && ! in_array( $child_name, $child_tariff_names, true ) ) {
+													$child_tariff_names[] = $child_name;
+													$child_data[]         = array(
+														'kids_tarriff_name'  => $child_name,
+													);
+												}
+											}
+										}
+									}
 								}
 							}
 						}
@@ -410,6 +428,10 @@ class Hotel_Ajax {
 
 		if ( ! empty( $seasons_data ) ) {
 			update_post_meta( $post_id, 'trusk_season_data', $seasons_data );
+		}
+
+		if ( ! empty( $child_data ) ) {
+			update_post_meta( $post_id, 'trusk_child_data', $child_data );
 		}
 	}
 }

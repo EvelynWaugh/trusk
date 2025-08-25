@@ -7,7 +7,7 @@ import type {
   ChildTariff,
   DialogState,
 } from '@/types';
-const { get } = lodash;
+const { get, omitDeep, pickBy, startsWith } = lodash;
 
 interface HotelState {
   // Main data
@@ -100,6 +100,24 @@ const initialSeason: BookingPeriod = {
 
 const data = TRUSKA_DATA?.section || TRUSKA_DATA?.acf || [];
 
+// const childData = omitDeep(
+//   pickBy(
+//     get(data, ['0', 'room', '0', 'tariff', '0', 'booking_period', '0'], {}),
+//     function (value: any, key: string) {
+//       return startsWith(key, 'price_for_child');
+//     }
+//   ),
+//   'kids_tarriff_price'
+// ) || {
+//   price_for_child: { kids_tarriff_name: '0-5' },
+//   price_for_child_2: { kids_tarriff_name: '6-11' },
+// };
+
+const childData = TRUSKA_DATA?.child || {
+  price_for_child: { kids_tarriff_name: '0-5' },
+  price_for_child_2: { kids_tarriff_name: '6-11' },
+};
+
 export const useHotelStore = create<HotelState>()(
   devtools(
     set => ({
@@ -111,7 +129,7 @@ export const useHotelStore = create<HotelState>()(
         ['0', 'rooms', '0', 'tariff', '0', 'booking_period'],
         []
       ),
-      childData: {},
+      childData: childData,
       tab: 0,
       renderedTaryf: 0,
 

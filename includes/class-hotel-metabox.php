@@ -128,50 +128,12 @@ class Hotel_Metabox {
 		global $typenow, $current_screen, $post;
 		// print_r($current_screen);
 		if ( $current_screen->id === 'post' || $current_screen->id === 'toplevel_page_hotel-settings' ) {
-			$react_data     = get_post_meta( $post->ID, 'trusk_whole_data', true );
-			$react_rooms    = get_post_meta( $post->ID, 'trusk_rooms_data', true );
-			$rooms          = get_field( 'rooms' );
-			$modified_rooms = array();
-			// if ( ! empty( $react_rooms ) ) {
+			$react_data  = get_post_meta( $post->ID, 'trusk_whole_data', true );
+			$react_rooms = get_post_meta( $post->ID, 'trusk_rooms_data', true );
+			$rooms       = get_field( 'rooms' );
 
-			// $used_keys = array();
-			// foreach ( $rooms as $room_key => $room ) {
-
-			// foreach ( $react_rooms as $rr ) {
-			// if ( $rr['room_id'] === $room['room_id'] ) {
-
-			// $taryf                                 = array_replace( $room['tariff'], $rr['tariff'] );
-			// $modified_rooms[ $room_key ]           = $room;
-			// $modified_rooms[ $room_key ]['tariff'] = $rr['tariff'];
-
-			// $used_keys[] = $room_key;
-			// }
-			// }
-			// }
-			// foreach ( $rooms as $room_key => $room ) {
-			// if ( in_array( $room_key, $used_keys ) ) {
-			// continue;
-			// }
-			// $modified_rooms[ $room_key ] = $room;
-			// }
-			// ksort( $modified_rooms );
-			// }
 			$tarifs  = get_post_meta( $post->ID, 'trusk_tarif_data', true );
 			$seasons = get_post_meta( $post->ID, 'trusk_season_data', true );
-			// if ( ! empty( $seasons ) ) {
-			// foreach ( $seasons as &$season ) {
-
-			// if ( isset( $season['booking_period_dates']['booking_period_begin'] ) ) {
-
-			// $season['booking_period_dates'] = array(
-			// array(
-			// 'booking_period_begin' => $season['booking_period_dates']['booking_period_begin'],
-			// 'booking_period_end'   => $season['booking_period_dates']['booking_period_end'],
-			// ),
-			// );
-			// }
-			// }
-			// }
 
 			$existing_tariffs     = array();
 			$rooms_missing_tariff = array();
@@ -198,6 +160,18 @@ class Hotel_Metabox {
 									),
 								);
 							}
+							if ( ! isset( $period_value['price_for_child'] ) || empty( $period_value['price_for_child'] ) ) {
+								$period_value['price_for_child'] = array(
+									array(
+										'kids_tarriff_name'  => '0-5',
+										'kids_tarriff_price' => '-',
+									),
+									array(
+										'kids_tarriff_name'  => '6-11',
+										'kids_tarriff_price' => '-',
+									),
+								);
+							}
 						}
 					}
 					if ( ! empty( $existing_tariffs ) ) {
@@ -213,6 +187,21 @@ class Hotel_Metabox {
 
 					$rooms[ $key ]['tariff'] = $existing_tariffs;
 				}
+			}
+
+			$child_tariff = get_post_meta( $post->ID, 'trusk_child_data', true );
+
+			// If no child tariff meta data exists, extract from rooms
+			if ( empty( $child_tariff ) && ! empty( $rooms ) ) {
+				$child_tariff = $this->extract_child_tariffs_from_rooms( $rooms );
+			}
+
+			// Fallback to default structure if still empty
+			if ( empty( $child_tariff ) ) {
+				$child_tariff = array(
+					'price_for_child'   => array( 'kids_tarriff_name' => '0-5' ),
+					'price_for_child_2' => array( 'kids_tarriff_name' => '6-11' ),
+				);
 			}
 
 			// wrap rooms in section array for acf
@@ -236,6 +225,7 @@ class Hotel_Metabox {
 					'rooms'   => $rooms,
 					'tarifs'  => ! empty( $tarifs ) ? $tarifs : false,
 					'seasons' => ! empty( $seasons ) ? $seasons : false,
+					'child'   => $child_tariff,
 
 				)
 			);
@@ -257,5 +247,45 @@ class Hotel_Metabox {
 				)
 			);
 		}
+	}
+
+	/**
+	 * Extract child tariff data from rooms structure
+	 *
+	 * @param array $rooms Rooms data from ACF
+	 * @return array Extracted child tariff data
+	 */
+	private function extract_child_tariffs_from_rooms( $rooms ) {
+		$child_data         = array();
+		$child_tariff_names = array();
+
+		// Loop through rooms to find child tariff data
+		foreach ( $rooms as $room ) {
+			if ( isset( $room['tariff'] ) && is_array( $room['tariff'] ) ) {
+				foreach ( $room['tariff'] as $tariff ) {
+					if ( isset( $tariff['booking_period'] ) && is_array( $tariff['booking_period'] ) ) {
+						foreach ( $tariff['booking_period'] as $period ) {
+							if ( isset( $period['price_for_child'] ) && is_array( $period['price_for_child'] ) ) {
+								foreach ( $period['price_for_child'] as $child_tariff ) {
+									if ( is_array( $child_tariff ) && isset( $child_tariff['kids_tarriff_name'] ) ) {
+										$child_name = $child_tariff['kids_tarriff_name'];
+										// Only add if not already processed
+										if ( ! empty( $child_name ) && ! in_array( $child_name, $child_tariff_names, true ) ) {
+											$child_tariff_names[]     = $child_name;
+											$child_key                = 'price_for_child' . ( count( $child_data ) > 0 ? '_' . ( count( $child_data ) + 1 ) : '' );
+											$child_data[ $child_key ] = array(
+												'kids_tarriff_name' => $child_name,
+											);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return $child_data;
 	}
 }

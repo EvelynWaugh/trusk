@@ -68,9 +68,19 @@ import {
   BoxTypo,
   TariffsContainer,
 } from '@/components/shared/StyledComponents';
+import { set } from 'lodash';
+import { se } from 'date-fns/locale';
 
 const React = TruskReact;
-const { useState, useEffect, useCallback, useMemo, useRef, memo } = TruskReact;
+const {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+} = TruskReact;
 
 // Helper function to convert HTML to EditorState
 const htmlToEditorState = (html: string): EditorState => {
@@ -95,12 +105,22 @@ export const TariffsManagement: React.FC = () => {
     setData,
     seasonData,
     childData,
+    setChildData,
     dialogTaryf,
     openDialogTaryf,
     closeDialogTaryf,
     dialogTaryfSingle,
     openDialogTaryfSingle,
     closeDialogTaryfSingle,
+    dialogChild,
+    openDialogChild,
+    closeDialogChild,
+    dialogChildSingle,
+    openDialogChildSingle,
+    closeDialogChildSingle,
+    childNew,
+    resetChildNew,
+    editedChild,
   } = useHotelStore();
 
   const [tarifNew, setTarifNew] = useState<Tariff>({
@@ -239,34 +259,142 @@ export const TariffsManagement: React.FC = () => {
     }
   };
 
-  const handleRichTextChange = useCallback(
-    (editorState: any, isEditing = false) => {
-      try {
-        const contentState = editorState.getCurrentContent();
-        const rawContent = convertToRaw(contentState);
-        const htmlContent = stateToHTML(contentState);
+  // Child tariff management functions
+  const saveNewChild = () => {
+    const childKey = `price_for_child_${Object.keys(childData).length + 1}`;
+    const newChildItem = {
+      kids_tarriff_name: childNew.new_child?.kids_tarriff_name || '',
+      kids_tarriff_price: '-',
+    };
+    const newChildData = {
+      ...childData,
+      [childKey]: newChildItem,
+    };
 
-        if (isEditing && editedTaryf) {
-          setEditTariffEditorState(editorState);
-          setEditedTaryf({
-            ...editedTaryf,
-            tariff_description: htmlContent,
-            tariff_description_raw: JSON.stringify(rawContent),
-          });
-        } else {
-          setNewTariffEditorState(editorState);
-          setTarifNew({
-            ...tarifNew,
-            tariff_description: htmlContent,
-            tariff_description_raw: JSON.stringify(rawContent),
-          });
-        }
-      } catch (error) {
-        console.error('Error converting rich text:', error);
-      }
-    },
-    [editedTaryf, tarifNew]
-  );
+    setChildData(newChildData);
+
+    // Update all booking periods in all rooms with new child data
+    const newData = data.map(section => {
+      const newRoomData = section.rooms.map(room => {
+        const newTariffs = room.tariff.map(tariff => ({
+          ...tariff,
+          booking_period: tariff.booking_period.map(period => ({
+            ...period,
+            price_for_child: [
+              ...period.price_for_child,
+              {
+                kids_tarriff_name: newChildItem.kids_tarriff_name,
+                kids_tarriff_price: newChildItem.kids_tarriff_price,
+              },
+            ],
+          })),
+        }));
+        return { ...room, tariff: newTariffs };
+      });
+      return { ...section, rooms: newRoomData };
+    });
+
+    setData(newData);
+    resetChildNew();
+    closeDialogChild();
+  };
+
+  const saveChildNewField = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Update the childNew state in the store
+    useHotelStore.setState({
+      childNew: {
+        new_child: {
+          kids_tarriff_name: e.target.value,
+          kids_tarriff_price: '-',
+        },
+      },
+    });
+  };
+
+  const setChildSingle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (editedChild && Object.keys(editedChild).length > 0) {
+      const childKey = Object.keys(editedChild)[0];
+      useHotelStore.setState(state => ({
+        editedChild: {
+          [childKey]: {
+            kids_tarriff_name: e.target.value,
+            kids_tarriff_price:
+              state.editedChild[childKey]?.kids_tarriff_price || '-',
+          },
+        },
+      }));
+    }
+  };
+
+  const saveSingleChild = () => {
+    if (editedChild && Object.keys(editedChild).length > 0) {
+      const childKey = Object.keys(editedChild)[0];
+      const newChildData = {
+        ...childData,
+        [childKey]: editedChild[childKey],
+      };
+
+      setChildData(newChildData);
+
+      // Update all booking periods in all rooms with updated child data
+      const newData = data.map(section => {
+        const newRoomData = section.rooms.map(room => {
+          const newTariffs = room.tariff.map(tariff => ({
+            ...tariff,
+            booking_period: tariff.booking_period.map(period => ({
+              ...period,
+              price_for_child: period.price_for_child.map((child, index) => {
+                // Update the specific child tariff based on its index or key
+                const childIndex = Object.keys(childData).indexOf(childKey);
+                if (index === childIndex) {
+                  return {
+                    kids_tarriff_name: editedChild[childKey].kids_tarriff_name,
+                    kids_tarriff_price:
+                      editedChild[childKey].kids_tarriff_price || '-',
+                  };
+                }
+                return child;
+              }),
+            })),
+          }));
+          return { ...room, tariff: newTariffs };
+        });
+        return { ...section, rooms: newRoomData };
+      });
+
+      setData(newData);
+      closeDialogChildSingle(childKey);
+    }
+  };
+
+  const deleteSingleChild = (childKey: string) => {
+    if (window.confirm('Удалить детский тариф?')) {
+      const newChildData = { ...childData };
+      delete newChildData[childKey];
+
+      setChildData(newChildData);
+
+      // Update all booking periods in all rooms by removing this child data
+      const newData = data.map(section => {
+        const newRoomData = section.rooms.map(room => {
+          const newTariffs = room.tariff.map(tariff => ({
+            ...tariff,
+            booking_period: tariff.booking_period.map(period => ({
+              ...period,
+              price_for_child: period.price_for_child.filter((_, index) => {
+                const childIndex = Object.keys(childData).indexOf(childKey);
+                return index !== childIndex;
+              }),
+            })),
+          }));
+          return { ...room, tariff: newTariffs };
+        });
+        return { ...section, rooms: newRoomData };
+      });
+
+      setData(newData);
+    }
+  };
 
   // Memoized editor configuration with more options
   const editorConfig = useMemo(
@@ -621,6 +749,106 @@ export const TariffsManagement: React.FC = () => {
             </DialogContent>
           </Dialog>
         ))}
+      </Box>
+      <Box>
+        {Object.entries(childData)?.map(([childKey, childValue], i) => (
+          <FormWrapper key={`korpus-${i}`}>
+            <FormControl>
+              <TextField
+                disabled
+                type="text"
+                label="Назва"
+                name={childKey}
+                value={childValue.kids_tarriff_name}
+              />
+            </FormControl>
+
+            <FormControl>
+              <IconButton
+                color="primary"
+                onClick={() => {
+                  useHotelStore.setState({
+                    editedChild: { [childKey]: childValue },
+                  });
+                  openDialogChildSingle(childKey);
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+            </FormControl>
+            {i > 0 && (
+              <FormControl>
+                <IconButton
+                  color="secondary"
+                  onClick={() => deleteSingleChild(childKey)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </FormControl>
+            )}
+          </FormWrapper>
+        ))}
+        {Object.keys(dialogChildSingle).map(childKey => (
+          <Dialog
+            key={childKey}
+            open={dialogChildSingle[childKey] || false}
+            onClose={() => closeDialogChildSingle(childKey)}
+          >
+            <DialogContent>
+              <FormWrapperVertical>
+                <FormControl>
+                  <TextField
+                    type="text"
+                    label="Название"
+                    name="name_child_new"
+                    value={
+                      editedChild && editedChild[childKey]
+                        ? editedChild[childKey].kids_tarriff_name
+                        : ''
+                    }
+                    onChange={setChildSingle}
+                  />
+                </FormControl>
+
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={saveSingleChild}
+                >
+                  Зберегти
+                </Button>
+              </FormWrapperVertical>
+            </DialogContent>
+          </Dialog>
+        ))}
+        <Tooltip title="Додати дитячі місця" placement="top">
+          <IconButtonAdd color="inherit" size="large" onClick={openDialogChild}>
+            <AddIcon />
+          </IconButtonAdd>
+        </Tooltip>
+        <Dialog open={dialogChild} onClose={closeDialogChild}>
+          <DialogContent>
+            <FormWrapperVertical>
+              <FormControl>
+                <TextField
+                  type="text"
+                  label="Назва"
+                  name="name_child_new"
+                  value={childNew.new_child?.kids_tarriff_name || ''}
+                  onChange={saveChildNewField}
+                />
+              </FormControl>
+
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={saveNewChild}
+              >
+                Зберегти
+              </Button>
+            </FormWrapperVertical>
+          </DialogContent>
+        </Dialog>
       </Box>
     </TariffsContainer>
   );
