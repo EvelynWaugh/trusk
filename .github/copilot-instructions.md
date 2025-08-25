@@ -125,71 +125,58 @@ See in /src/adminTruskavetsk.js - there are 4 Tabs (Sections/and their Rooms, Ta
 	"section_name": "Санаторий Карпаты",
     "rooms": [
             {
-                "0": {
-                    "id": "dc6fb995-64be-4115-b310-ffc9d2c56e55",
-                    "tariff_name": "Лікувальна путівка",
-                    "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>базове лікування за призначенням лікаря</li>\n<li>користування бюветом</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>додаткове місце з 4 років - 400 грн./доба</li>\n<li>дітям на основне місце знижок не передбачено.</li>\n</ul>\n<p></p>\n",
-
-                    "lovest_price_tariff": false,
-                    "booking_period": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "booking_period_name": "Низький сезон",
-                            "on_of_period": "yes",
-                            "current_period": false,
-                            "booking_period_dates": [
-                                {
-                                    "booking_period_begin": "20.01.2025",
-                                    "booking_period_end": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "price_for_adult": {
-                                "1-adult": "1800"
-                            },
-                            "dodatkove_mistse": "",
-                            "price_for_child": [
-                                    {
-                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
-                                    "kids_tarriff_price": "-"
-                                }],
-                        }
-                    ]
-                },
-                "1": {
-                    "id": "f4ca68cd-8620-4d4c-a515-5321f1e4daec",
-                    "tariff_name": "Оздоровча путівка",
-                    "tariff_description": "<p><strong>Вартість номера включає:</strong></p>\n<ul>\n<li>проживання</li>\n<li>триразове харчування</li>\n<li>консультація лікаря</li>\n<li>користування бюветом</li>\n<li>киснева пінка, фіточай, масаж однієї одиниці</li>\n<li>WI-FI</li>\n<li>парковка</li>\n</ul>\n<p><strong>Додаткове місце:</strong></p>\n<ul>\n<li>проживання дітей до 4 років без місця та харчування - безкоштовно</li>\n<li>проживання дітей від 4 років - 400грн/доба</li>\n<li>дітям на основне місце знижок не передбачено</li>\n</ul>\n",
- 
-                    "lovest_price_tariff": true,
-                    "booking_period": [
-                        {
-                            "id": "779a085e-adb0-4a5b-808e-9c3e4ac64aa4",
-                            "booking_period_name": "Низький сезон",
-                            "on_of_period": "yes",
-                            "current_period": false,
-                            "booking_period_dates": [
-                                {
-                                    "booking_period_begin": "20.01.2025",
-                                    "booking_period_end": "01.04.2025"
-                                }
-                            ],
-                            "position": 0,
-                            "price_for_adult": {
-                                "1-adult": "1500"
-                            },
-                            "dodatkove_mistse": "",
-                           "price_for_child": [
-                                    {
-                                    "kids_tarriff_name": "Доп. место с 3-10 лет без. лечения",
-                                    "kids_tarriff_price": "-"
-                                }],
-                        }
-                    ]
-                },
+                
                 "room_name": "Одноместный стандарт",
                 "room_id": "f3e2b49d-236e-456d-b83f-67c4ed95825b",
                 "room_main_foto": 15981,
+				"hide_room": "no",
+				"number_of_rooms": 2,
+				"ploshha_nomeru": "24",
+				"in_room_amenities": {
+					"balkon": "yes",
+					"bide": "no",
+					"dush": "yes",
+					"dytyache_lizhechko": "on_request",
+					"dyvan_ne_rozkladnyj": "no",
+					"dyvan_rozkladnyj": "no",
+					"dzhakuzi": "no",
+					"elektrochajnyk": "yes",
+					"fen": "yes",
+					"halat": "no",
+					"holodylnyk": "yes",
+					"kabelne_telebachennya": "yes",
+					"kamin": "no",
+					"kavachaj_v_nomeri": "no",
+					"kavomashyna": "no",
+					"komplekt_tualetnogo_pryladdya": "yes",
+					"kondytsioner": "yes",
+					"kuhnya": "no",
+					"lizhko_dvospalne": "custom",
+					"lizhko_dvospalne_opys": "або два роздільних",
+					"lizhko_odnospalne": "no",
+					"mikrohvylova_pich": "no",
+					"mini_bar": "yes",
+					"myake_krislo": "no",
+					"myakyj_kutok": "no",
+					"nabir_posudu": "no",
+					"nabir_rushnykiv": "yes",
+					"obidnij_stil": "no",
+					"pralna_mashyna": "no",
+					"praska": "no",
+					"prylizhkovi_tumbochky": "yes",
+					"robochyj_stil": "yes",
+					"sanvuzel": "yes",
+					"sauna": "no",
+					"sejf": "yes",
+					"shafa_dlya_odyagu": "yes",
+					"shafa_kupe": "no",
+					"suputnykove_telebachennya": "no",
+					"tapochky": "yes",
+					"telefon": "yes",
+					"televizor": "yes",
+					"vanna": "no",
+					"zona_vidpochynku": "no"
+					},
                 "room_gallery": [
                     {
                         "room_gallery_image": 15982,
